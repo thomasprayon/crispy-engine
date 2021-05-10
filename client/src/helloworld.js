@@ -30,3 +30,29 @@
 // //         return <div>Hello, World</div>;
 // //     }
 // // }
+
+// //PART 2 SN
+// const csurf = require("csurf");
+
+// //cookie session
+// app.use(csurf());
+
+// app.use(function (req, res, next) {
+//     const token = req.csrfToken();
+//     console.log("token: ", token);
+//     res.cookie("mytoken", token);
+//     next();
+// });
+// //url enconded
+
+// //we need to add a file in client/src where we call it axios.js
+// // import axios from "axios";
+// var instance = axios.create({
+//     xsrfCookieName: "mytoken",
+//     xsrfHeaderName: "csrf-token",
+// });
+
+// export default instance;
+
+// //REACT ROUTER
+// //HASH ROUTER

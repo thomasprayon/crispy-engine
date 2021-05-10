@@ -1,3 +1,26 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
 body {
     background-color: ghostwhite;
+    font-family: "Be Vietnam";
+}
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: space-around;
+}
+.registration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-registration {
+    display: contents;
+}
+.register-btn {
+    margin-top: 1rem;
 }
