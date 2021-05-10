@@ -2,17 +2,15 @@ import { Component } from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
 
-export default class Registration extends Component {
+export default class Login extends Component {
     constructor() {
         super();
-        this.state = {};
+        this.state;
     }
     submit() {
-        console.log("Submit working on axios registration!");
+        console.log("Submit working on axios login");
         axios
-            .post("/registration", {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
+            .post("/login", {
                 email: this.state.email,
                 password: this.state.password,
             })
@@ -28,37 +26,18 @@ export default class Registration extends Component {
     }
     handleChange({ target }) {
         this.setState({
-            [target.name]: target.value,
+            [e.target.name]: target.value,
         });
     }
     render() {
         return (
             <div className="registration-login-container">
+                {" "}
                 <form
                     method="POST"
                     autoComplete="off"
                     className="form-registration-login"
                 >
-                    <h3>Register here</h3>
-                    {this.state.error && (
-                        <p className="error">
-                            Oops! Something went wrong, try again!!
-                        </p>
-                    )}
-                    <label htmlFor="firstName">First Name</label>
-                    <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <label htmlFor="lastName">Last Name</label>
-                    <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        onChange={(e) => this.handleChange(e)}
-                    />
                     <label htmlFor="lastName">Email</label>
                     <input
                         type="email"
@@ -78,8 +57,8 @@ export default class Registration extends Component {
                     >
                         Submit
                     </button>
+                    <Link to="/">Sign Up</Link>
                 </form>
-                <Link to="/login">Already a member? Log in!</Link>
             </div>
         );
     }

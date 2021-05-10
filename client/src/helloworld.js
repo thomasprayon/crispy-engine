@@ -56,3 +56,5 @@
 
 // //REACT ROUTER
 // //HASH ROUTER
+
+//PART 3

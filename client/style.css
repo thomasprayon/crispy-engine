@@ -13,14 +13,17 @@ body {
     height: 100vh;
     justify-content: space-around;
 }
-.registration-container {
+.registration-login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.form-registration {
+.form-registration-login {
     display: contents;
 }
 .register-btn {
     margin-top: 1rem;
+}
+.temp-logo {
+    width: 50%;
 }

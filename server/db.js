@@ -6,3 +6,9 @@ module.exports.addUser = (firstName, lastName, email, hashPassword) => {
     const params = [firstName, lastName, email, hashPassword];
     return db.query(q, params);
 };
+
+module.exports.getUser = (email) => {
+    const q = `SELECT * FROM users WHERE email = $1`;
+    const params = [email];
+    return db.query(q, params);
+};

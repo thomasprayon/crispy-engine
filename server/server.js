@@ -3,9 +3,10 @@ const app = express();
 const compression = require("compression");
 const path = require("path");
 const cookieSession = require("cookie-session");
-const { COOKIE_SECRET } = require("./secrets.json");
+const { COOKIE_SECRET } = require("../secrets.json");
 const { hash, compare } = require("./bc");
 const db = require("./db");
+const csurf = require("csurf");
 
 app.use(
     cookieSession({
@@ -13,6 +14,13 @@ app.use(
         maxAge: 1000 * 60 * 60 * 24 * 7 * 6,
     })
 );
+
+app.use(csurf());
+
+app.use(function (req, res, next) {
+    res.cookie("mytoken", req.csrfToken());
+    next();
+});
 
 app.use(
     express.urlencoded({
@@ -46,19 +54,23 @@ app.post("/registration", (req, res) => {
                     const { id } = result.rows[0];
                     req.session.userId = id;
                     res.json({
-                        success: true,
+                        sucess: true,
                     });
                 })
                 .catch((err) => {
                     console.log("Error in POST addUser /registration", err);
                     res.json({
-                        success: false,
+                        sucess: false,
                     });
                 });
         })
         .catch((err) => {
             console.log("Error in POST /registration", err);
         });
+});
+
+app.post("/login", (req, res) => {
+    console.log("POST /login made!!");
 });
 
 app.get("*", function (req, res) {
