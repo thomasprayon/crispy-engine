@@ -17,7 +17,8 @@ export default class Registration extends Component {
                 password: this.state.password,
             })
             .then(({ data }) => {
-                if (data.sucess) {
+                console.log("data", data);
+                if (data.success) {
                     location.replace("/");
                 } else {
                     this.setState({

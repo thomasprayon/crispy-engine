@@ -15,7 +15,8 @@ export default class Login extends Component {
                 password: this.state.password,
             })
             .then(({ data }) => {
-                if (data.sucess) {
+                console.log("data", data);
+                if (data.success) {
                     location.replace("/");
                 } else {
                     this.setState({
@@ -26,39 +27,30 @@ export default class Login extends Component {
     }
     handleChange({ target }) {
         this.setState({
-            [e.target.name]: target.value,
+            [target.name]: target.value,
         });
     }
     render() {
         return (
             <div className="registration-login-container">
                 {" "}
-                <form
-                    method="POST"
-                    autoComplete="off"
-                    className="form-registration-login"
-                >
-                    <label htmlFor="lastName">Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <label htmlFor="lastName">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <button
-                        onClick={() => this.submit()}
-                        className="register-btn"
-                    >
-                        Submit
-                    </button>
-                    <Link to="/">Sign Up</Link>
-                </form>
+                <label htmlFor="lastName">Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    onChange={(e) => this.handleChange(e)}
+                />
+                <label htmlFor="lastName">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    onChange={(e) => this.handleChange(e)}
+                />
+                <button onClick={() => this.submit()} className="register-btn">
+                    Submit
+                </button>
+                <Link to="/">Sign Up</Link>
             </div>
         );
     }
