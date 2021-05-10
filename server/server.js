@@ -7,8 +7,10 @@ const { COOKIE_SECRET } = require("../secrets.json");
 const csurf = require("csurf");
 const { hash, compare } = require("./bc");
 const db = require("./db");
-
-app.use(express.static(path.join(__dirname, "..", "client", "public")));
+const cryptoRandomString = require("crypto-random-string");
+const secretCode = cryptoRandomString({
+    length: 6,
+});
 
 app.use(
     cookieSession({
@@ -31,6 +33,8 @@ app.use(
         extended: false,
     })
 );
+
+app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
 app.use(express.json());
 
@@ -85,8 +89,8 @@ app.post("/login", (req, res) => {
         console.log("result.rows[0]", result.rows[0]);
         const { password_hash } = result.rows[0];
         const { id } = result.rows[0];
-        console.log("password_hash", password_hash);
-        console.log("id", id);
+        // console.log("password_hash", password_hash);
+        // console.log("id", id);
         compare(password, password_hash)
             .then((match) => {
                 // console.log("match", match);
@@ -106,6 +110,16 @@ app.post("/login", (req, res) => {
                 console.log("Error in POST /login", err);
             });
     });
+});
+
+//POST  RESET PASSWORD --> /password/reset/start
+app.post("/password/reset/start", (req, res) => {
+    console.log("POST /password/reset/START made!!");
+});
+
+//POST RESET PASSWORD --> /password/reset/verify
+app.post("/password/reset/verify", (req, res) => {
+    console.log("POST /password/reset/VERIFY made!!");
 });
 
 app.get("*", function (req, res) {

@@ -12,3 +12,21 @@ module.exports.getUser = (email) => {
     const params = [email];
     return db.query(q, params);
 };
+
+module.exports.insertCode = (email, code) => {
+    const q = `INSERT INTO reset_codes (email, code) VALUES ($1, $2) RETURNING email, code `;
+    const params = [email, code];
+    return db.query(q, params);
+};
+
+module.exports.selectCode = (email) => {
+    const q = `SELECT * FROM reset_codes WHERE email = $1 AND CURRENT_TIMESTAMP - created_at < INTERVAL '10 minutes';`;
+    const params = [email];
+    return db.query(q, params);
+};
+
+module.exports.updateUsersPassword = (email, hashPassword) => {
+    const q = `UPDATE users SET password_hash = $1 WHERE email = $2 RETURNING password_hash, email`;
+    const params = [email, hashPassword];
+    return db.query(q, params);
+};

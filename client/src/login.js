@@ -34,23 +34,29 @@ export default class Login extends Component {
         return (
             <div className="registration-login-container">
                 {" "}
-                <label htmlFor="lastName">Email</label>
-                <input
-                    type="email"
-                    name="email"
-                    onChange={(e) => this.handleChange(e)}
-                />
-                <label htmlFor="lastName">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    onChange={(e) => this.handleChange(e)}
-                />
-                <button onClick={() => this.submit()} className="register-btn">
-                    Submit
-                </button>
-                <Link to="/">Sign Up</Link>
+                <form autoComplete="off" className="form-registration-login">
+                    <label htmlFor="lastName">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                    <label htmlFor="lastName">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                    <button
+                        onClick={() => this.submit()}
+                        className="register-btn"
+                    >
+                        Submit
+                    </button>
+                    <Link to="/">Sign Up</Link>
+                    <Link to="/password/reset/start">Forgot your Passwor?</Link>
+                </form>
             </div>
         );
     }
