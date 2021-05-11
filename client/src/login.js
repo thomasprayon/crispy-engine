@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default class Login extends Component {
     constructor() {
         super();
-        this.state;
+        this.state = {};
     }
     submit() {
         console.log("Submit working on axios login");
@@ -33,19 +33,26 @@ export default class Login extends Component {
     render() {
         return (
             <div className="registration-login-container">
-                {" "}
-                <form autoComplete="off" className="form-registration-login">
-                    <label htmlFor="lastName">Email</label>
+                {this.state.error && (
+                    <p className="error">
+                        Oops! Something went wrong, try again!!
+                    </p>
+                )}
+                <div className="form-registration-login">
+                    <label htmlFor="email">Email</label>
                     <input
                         type="email"
+                        id="email"
                         name="email"
+                        autoComplete="off"
                         onChange={(e) => this.handleChange(e)}
                     />
-                    <label htmlFor="lastName">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input
                         type="password"
                         id="password"
                         name="password"
+                        autoComplete="off"
                         onChange={(e) => this.handleChange(e)}
                     />
                     <button
@@ -55,8 +62,8 @@ export default class Login extends Component {
                         Submit
                     </button>
                     <Link to="/">Sign Up</Link>
-                    <Link to="/password/reset/start">Forgot your Passwor?</Link>
-                </form>
+                    <Link to="/password/reset">Forgot your Password?</Link>
+                </div>
             </div>
         );
     }

@@ -35,11 +35,7 @@ export default class Registration extends Component {
     render() {
         return (
             <div className="registration-login-container">
-                <form
-                    method="POST"
-                    autoComplete="off"
-                    className="form-registration-login"
-                >
+                <div className="form-registration-login">
                     <h3>Register here</h3>
                     {this.state.error && (
                         <p className="error">
@@ -51,6 +47,7 @@ export default class Registration extends Component {
                         type="text"
                         id="firstName"
                         name="firstName"
+                        autoComplete="off"
                         onChange={(e) => this.handleChange(e)}
                     />
                     <label htmlFor="lastName">Last Name</label>
@@ -58,19 +55,23 @@ export default class Registration extends Component {
                         type="text"
                         id="lastName"
                         name="lastName"
+                        autoComplete="off"
                         onChange={(e) => this.handleChange(e)}
                     />
-                    <label htmlFor="lastName">Email</label>
+                    <label htmlFor="email">Email</label>
                     <input
                         type="email"
+                        id="email"
                         name="email"
+                        autoComplete="off"
                         onChange={(e) => this.handleChange(e)}
                     />
-                    <label htmlFor="lastName">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input
                         type="password"
                         id="password"
                         name="password"
+                        autoComplete="off"
                         onChange={(e) => this.handleChange(e)}
                     />
                     <button
@@ -79,7 +80,7 @@ export default class Registration extends Component {
                     >
                         Submit
                     </button>
-                </form>
+                </div>
                 <Link to="/login">Already a member? Log in!</Link>
             </div>
         );

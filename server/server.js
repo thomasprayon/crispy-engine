@@ -71,6 +71,7 @@ app.post("/registration", (req, res) => {
                     console.log("Error in POST addUser /registration", err);
                     res.json({
                         success: false,
+                        error: "Error in registration",
                     });
                 });
         })
@@ -93,7 +94,7 @@ app.post("/login", (req, res) => {
         // console.log("id", id);
         compare(password, password_hash)
             .then((match) => {
-                // console.log("match", match);
+                console.log("match", match);
                 if (match === true) {
                     req.session.userId = id;
                     res.json({
@@ -103,6 +104,7 @@ app.post("/login", (req, res) => {
                     console.log("SOMETHING IS WRONG HERE!");
                     res.json({
                         success: false,
+                        error: "Error in login",
                     });
                 }
             })
