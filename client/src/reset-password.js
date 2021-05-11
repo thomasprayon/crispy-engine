@@ -106,7 +106,7 @@ export default class ResetPassword extends Component {
                         name="verification-code"
                         onChange={(e) => this.handleChange(e)}
                     />
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">New Password</label>
                     <input
                         type="password"
                         id="password"

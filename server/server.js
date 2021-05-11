@@ -8,9 +8,7 @@ const csurf = require("csurf");
 const { hash, compare } = require("./bc");
 const db = require("./db");
 const cryptoRandomString = require("crypto-random-string");
-const secretCode = cryptoRandomString({
-    length: 6,
-});
+const { sendEmail } = require("./ses");
 
 app.use(
     cookieSession({
@@ -71,7 +69,6 @@ app.post("/registration", (req, res) => {
                     console.log("Error in POST addUser /registration", err);
                     res.json({
                         success: false,
-                        error: "Error in registration",
                     });
                 });
         })
@@ -101,10 +98,9 @@ app.post("/login", (req, res) => {
                         success: true,
                     });
                 } else {
-                    console.log("SOMETHING IS WRONG HERE!");
+                    // console.log("SOMETHING IS WRONG HERE!");
                     res.json({
                         success: false,
-                        error: "Error in login",
                     });
                 }
             })
@@ -117,11 +113,71 @@ app.post("/login", (req, res) => {
 //POST  RESET PASSWORD --> /password/reset/start
 app.post("/password/reset/start", (req, res) => {
     console.log("POST /password/reset/START made!!");
+    // console.log("req.body", req.body);
+    const { email } = req.body;
+    const code = cryptoRandomString({
+        length: 6,
+    });
+    db.getUser(email)
+        .then((result) => {
+            // console.log("result: ", result);
+            if (result.rows[0]) {
+                console.log("result.rows: ", result.rows);
+                db.insertCode(email, code)
+                    .then((result) => {
+                        // console.log("result inside InsertCode: ", result);
+                        sendEmail(
+                            result.rows[0].email,
+                            `Here is the verification code for you: ${result.rows[0].code}`,
+                            "Reset password"
+                        );
+                        res.json({
+                            success: true,
+                        });
+                    })
+                    .catch((err) => {
+                        console.log("Error in insertCode", err);
+                        res.json({
+                            success: false,
+                        });
+                    });
+            }
+        })
+        .catch((err) => {
+            console.log("Error in POST /password/reset/start", err);
+        });
 });
 
 //POST RESET PASSWORD --> /password/reset/verify
 app.post("/password/reset/verify", (req, res) => {
     console.log("POST /password/reset/VERIFY made!!");
+    // console.log("req.body", req.body);
+    const { email, code, password } = req.body;
+    db.selectCode(email)
+        .then((result) => {
+            console.log("result.rows[0]", result.rows[0]);
+            if (result.rows[0].code === code) {
+                hash(password)
+                    .then((hashPassword) => {
+                        db.updateUsersPassword(email, hashPassword)
+                            .then((result) => {
+                                console.log("result", result);
+                            })
+                            .catch((err) => {
+                                console.log("Error in updating Password", err);
+                            });
+                    })
+                    .catch((err) => {
+                        console.log("Error in hashing the password", err);
+                        res.json({
+                            success: false,
+                        });
+                    });
+            }
+        })
+        .catch((err) => {
+            console.log("Error in POST /password/reset/verify", err);
+        });
 });
 
 app.get("*", function (req, res) {
