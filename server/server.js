@@ -9,6 +9,10 @@ const { hash, compare } = require("./bc");
 const db = require("./db");
 const cryptoRandomString = require("crypto-random-string");
 const { sendEmail } = require("./ses");
+const s3 = require("./s3");
+const s3Url = require("./config.json");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
 
 app.use(
     cookieSession({
@@ -31,6 +35,23 @@ app.use(
         extended: false,
     })
 );
+const diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function (uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    },
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152,
+    },
+});
 
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
@@ -187,6 +208,17 @@ app.post("/password/reset/verify", (req, res) => {
         .catch((err) => {
             console.log("Error in POST /password/reset/verify", err);
         });
+});
+
+//POST UPLOAD PROFPIC --> /upload
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("POST /upload made!!");
+    console.log("req.file", req.file);
+    if (req.file) {
+        const { filename } = req.file;
+        const fullUrl = s3Url + filename;
+        console.log("fullUrl", fullUrl);
+    }
 });
 
 app.get("*", function (req, res) {

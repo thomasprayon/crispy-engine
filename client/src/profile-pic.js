@@ -1,11 +1,21 @@
 export default function ProfilePic(props) {
     return (
         <>
-            <h2>
-                Hey I am the Xmpl component. My name is: {props.firstName} {""}
-                {props.lastName}
-            </h2>
-            <img className="small" src={props.imgUrl} />
+            <p>ProfilePic</p>
+            <div className="profilePic-img-container">
+                <img
+                    className="small"
+                    src={props.imgUrl}
+                    alt={`${props.firstName} + ${props.lastName}`}
+                    onClick={props.toggleUploader}
+                />
+            </div>
+            <div className="profile-txt-container">
+                <p>
+                    {props.firstName} {""} {props.lastName}
+                </p>
+            </div>
+            <p>/Profile-Pic</p>
         </>
     );
 }

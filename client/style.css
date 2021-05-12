@@ -32,4 +32,5 @@ body {
 }
 .small {
     width: 15%;
+    object-fit: cover;
 }
