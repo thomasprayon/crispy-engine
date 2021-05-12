@@ -122,10 +122,14 @@ app.post("/password/reset/start", (req, res) => {
         .then((result) => {
             // console.log("result: ", result);
             if (result.rows[0]) {
-                console.log("result.rows: ", result.rows);
+                // console.log("result.rows: ", result.rows);
                 db.insertCode(email, code)
                     .then((result) => {
                         // console.log("result inside InsertCode: ", result);
+                        console.log(
+                            "result.rows[0].email",
+                            result.rows[0].email
+                        );
                         sendEmail(
                             result.rows[0].email,
                             `Here is the verification code for you: ${result.rows[0].code}`,
@@ -155,16 +159,21 @@ app.post("/password/reset/verify", (req, res) => {
     const { email, code, password } = req.body;
     db.selectCode(email)
         .then((result) => {
-            console.log("result.rows[0]", result.rows[0]);
+            // console.log("result.rows[0]", result.rows[0]);
             if (result.rows[0].code === code) {
                 hash(password)
                     .then((hashPassword) => {
                         db.updateUsersPassword(email, hashPassword)
-                            .then((result) => {
-                                console.log("result", result);
+                            .then(() => {
+                                res.json({
+                                    success: true,
+                                });
                             })
                             .catch((err) => {
                                 console.log("Error in updating Password", err);
+                                res.json({
+                                    success: false,
+                                });
                             });
                     })
                     .catch((err) => {

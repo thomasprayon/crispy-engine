@@ -45,11 +45,12 @@ export default class ResetPassword extends Component {
                     });
                 });
         } else if (this.state.view === 2) {
+            // console.log("AXIOS POST taking place view 2");
             axios
                 .post("/password/reset/verify", {
-                    email: this.state.email,
-                    code: this.state["verification-code"],
-                    password: this.state.password,
+                    email: this.state["email"],
+                    password: this.state["password"],
+                    code: this.state["code"],
                 })
                 .then(() => {
                     this.setState({
@@ -99,11 +100,11 @@ export default class ResetPassword extends Component {
                             Oops! Something went wrong, try again!!
                         </p>
                     )}
-                    <label htmlFor="verification-code">Verification Code</label>
+                    <label htmlFor="code">Verification Code</label>
                     <input
                         type="text"
-                        id="verification-code"
-                        name="verification-code"
+                        id="code"
+                        name="code"
                         onChange={(e) => this.handleChange(e)}
                     />
                     <label htmlFor="password">New Password</label>

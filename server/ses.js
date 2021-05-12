@@ -14,6 +14,7 @@ const ses = new aws.SES({
     region: "eu-west-1",
 });
 
+// console.log("secrets: ", secrets);
 module.exports.sendEmail = function (recipient, message, subject) {
     return ses
         .sendEmail({

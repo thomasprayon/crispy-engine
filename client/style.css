@@ -27,3 +27,9 @@ body {
 .temp-logo {
     width: 40%;
 }
+.error {
+    color: red;
+}
+.small {
+    width: 15%;
+}
