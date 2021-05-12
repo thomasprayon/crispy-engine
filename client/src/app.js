@@ -42,7 +42,10 @@ export default class App extends Component {
                         toggleUploader={this.toggleUploader}
                     />
                     {this.state.uploaderIsVisible && (
-                        <Uploader updateProfilePic={this.updateProfilePic} />
+                        <Uploader
+                            updateProfilePic={this.updateProfilePic}
+                            toggleUploader={this.toggleUploader}
+                        />
                     )}
                 </div>
             </>

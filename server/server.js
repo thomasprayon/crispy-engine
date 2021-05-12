@@ -10,7 +10,7 @@ const db = require("./db");
 const cryptoRandomString = require("crypto-random-string");
 const { sendEmail } = require("./ses");
 const s3 = require("./s3");
-const s3Url = require("./config.json");
+const { s3Url } = require("./config.json");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 

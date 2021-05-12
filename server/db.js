@@ -30,3 +30,9 @@ module.exports.updateUsersPassword = (email, hashPassword) => {
     const params = [email, hashPassword];
     return db.query(q, params);
 };
+
+module.exports.uploadProfilePic = (fullUrl, userId) => {
+    const q = `UPDATE users SET img_url = $1 WHERE id = $2 RETURNING *`;
+    const params = [fullUrl, userId];
+    return db.query(q, params);
+};
