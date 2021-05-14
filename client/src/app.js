@@ -39,6 +39,11 @@ export default class App extends Component {
         });
         this.toggleUploader();
     }
+    setBio(newBio) {
+        this.setState({
+            bio: newBio,
+        });
+    }
 
     render() {
         return (
@@ -62,6 +67,7 @@ export default class App extends Component {
                         lastName={this.state.lastName}
                         imgUrl={this.state.img || "/images/user_default.png"}
                         bio={this.state.bio}
+                        setBio={this.setBio}
                     />
                     {this.state.uploaderIsVisible && (
                         <Uploader

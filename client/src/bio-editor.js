@@ -2,40 +2,63 @@ import { Component } from "react";
 import axios from "axios";
 
 export default class BioEditor extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.state= {
-            showTextArea = false
-        }
+        this.state = {
+            showTextArea: false,
+        };
     }
-    componentDidMount(){
-        console.log("Bio-editor just mounted!!");
-    }
-    handleChange({target}){
-        console.log("target", target);
+    handleChange({ target }) {
+        // console.log("target", target);
         this.setState({
-            [target.name]: target.value
-        })
+            [target.name]: target.value,
+        });
     }
-    toggleBio(){
-        console.log("toggleBio is here")
+    toggleBio() {
+        console.log("toggleBio is here");
         this.setState({
-            showTextArea: !this.state.showTextArea
-        })
+            showTextArea: !this.state.showTextArea,
+        });
     }
-    submitBio(e){
-        console.log("event submit bio", e)
+    submitBio(e) {
+        console.log("event submit bio", e);
         e.preventDefault();
-
-
+        console.log("this.state", this.state);
+        axios
+            .post("/update-bio", {
+                bio: this.state.bio,
+            })
+            .then((response) => {
+                console.log("response", response);
+            })
+            .catch((err) => {
+                console.log("Error in Axios /update-bio", err);
+            });
     }
-    render(){
+    render() {
         return (
             <>
-            <h1>Bio-editor</h1>
-            <textarea onChange={(e) => this.handleChange(e)}></textarea>
-            <button onClick={(e) => this.submit(e)}>Submit</button>
+                <p>Bio-editor</p>
+                {!this.props.bio && (
+                    <button onClick={() => this.toggleBio()}>Add bio</button>
+                )}
+                {this.props.bio && (
+                    <>
+                        <p>{this.props.bio}</p>
+                        <button onClick={() => this.toggleBio}>Edit bio</button>
+                    </>
+                )}
+                {this.state.showTextArea && (
+                    <>
+                        <textarea
+                            onChange={(e) => this.handleChange(e)}
+                        ></textarea>
+                        <button onClick={(e) => this.submitBio(e)}>
+                            Submit
+                        </button>
+                    </>
+                )}
             </>
-        )
+        );
     }
 }

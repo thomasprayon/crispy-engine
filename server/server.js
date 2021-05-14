@@ -255,6 +255,7 @@ app.get("/user", (req, res) => {
 //POST UPDATE BIO -->
 app.post("/update-bio", (req, res) => {
     console.log("POST /update-bio made!!");
+    console.log("req.body", req.body);
 });
 
 app.get("*", function (req, res) {

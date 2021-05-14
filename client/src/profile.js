@@ -1,4 +1,5 @@
 import ProfilePic from "./profile-pic";
+import BioEditor from "./bio-editor";
 
 export default function Profile(props) {
     return (
@@ -10,11 +11,11 @@ export default function Profile(props) {
                     alt={`${props.firstName} ${props.lastName}`}
                     className="profile-img"
                 />
-                <p>
-                    {props.firstName}
-                    {""}
-                    {props.lastName}
-                </p>
+                <h4>
+                    {props.firstName} {props.lastName}
+                </h4>
+                <p>{props.bio}</p>
+                <BioEditor bio={props.bio} setBio={props.setBio} />
             </div>
         </>
     );

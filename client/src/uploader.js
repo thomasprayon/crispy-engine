@@ -46,8 +46,6 @@ export default class Uploader extends Component {
                     </span>
                     <div className="uploader-content">
                         <h2>Do you want to change your image?</h2>
-
-                        {/* <label htmlFor="file">Choose a file</label> */}
                         <div class="upload-btn-wrapper">
                             <button className="btn">Upload</button>
                             <input
