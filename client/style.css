@@ -3,8 +3,13 @@
     box-sizing: border-box;
 }
 body {
-    background-color: ghostwhite;
-    font-family: "Be Vietnam";
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    font-family: "Source Sans Pro";
+}
+.main-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
 }
 .welcome-container {
     display: flex;
@@ -24,13 +29,121 @@ body {
 .register-btn {
     margin-top: 1rem;
 }
-.temp-logo {
-    width: 40%;
+.logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
 }
 .error {
     color: red;
 }
-.small {
-    width: 15%;
+
+.main-container {
+    display: flex;
+}
+a {
+    text-decoration: none;
+}
+input {
+    background: transparent;
+    border: none;
+    height: 25px;
+    border-bottom: 1px solid black;
+    font-weight: 600;
+}
+input:focus {
+    outline: 0;
+}
+.reset-password-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logo-container {
+    display: contents;
+}
+
+/* PROFILEPIC  */
+.img-profilePic {
+    height: 25rem;
+    width: 70rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.profile-picture-img {
+    height: 75px;
     object-fit: cover;
+    border-radius: 50%;
+    width: 75px;
+    margin-top: 0.8rem;
+}
+
+/* UPLOADER STYLING */
+.uploader-container {
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    border: 2px solid black;
+    width: 30rem;
+    height: 12rem;
+    background-color: aliceblue;
+}
+.uploader-content {
+    position: relative;
+    top: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.close-span {
+    position: absolute;
+    left: 97%;
+    font-weight: 600;
+}
+.uploader-btn {
+    margin-top: 15px;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.upload-btn-wrapper input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 20px;
+    opacity: 0;
+}
+
+.logo-logout {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+}
+
+.logo-header {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+/* PROFILE STYLING */
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }

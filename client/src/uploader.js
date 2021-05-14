@@ -10,9 +10,6 @@ export default class Uploader extends Component {
         console.log("Uploader just mounted");
         console.log("props in Uploader", this.props);
     }
-    methodInUploader() {
-        this.props.updateProfilePic("Whoaaaaaa");
-    }
     handleChange({ target }) {
         console.log("handleChange working!!");
         this.setState({
@@ -21,14 +18,17 @@ export default class Uploader extends Component {
     }
     submit(e) {
         console.log("Submit working on axios uploader");
-        console.log("event: ", e);
+        // console.log("event: ", e);
         e.preventDefault();
         var formData = new FormData();
         formData.append("file", this.state.file);
         axios
             .post("/upload", formData)
             .then((response) => {
-                console.log("response: ", response);
+                // console.log("response.data: ", response.data);
+                const { img_url } = response.data;
+                console.log("img_url: ", img_url);
+                this.props.updateProfilePic(img_url);
             })
             .catch((err) => {
                 console.log("Error in POST AXIOS /upload", err);
@@ -37,20 +37,32 @@ export default class Uploader extends Component {
     render() {
         return (
             <>
-                <p>Uploader</p>
-                <h2>Upload a profile pic </h2>
-                <div>
-                    <label htmlFor="file">Choose a file</label>
-                    <input
-                        type="file"
-                        name="file"
-                        accept="image/*"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <button onClick={(e) => this.submit(e)}>Submit</button>
-                    <button onClick={this.props.toggleUploader}>Cancel</button>
+                <div className="uploader-container">
+                    <span
+                        onClick={this.props.toggleUploader}
+                        className="close-span"
+                    >
+                        X
+                    </span>
+                    <div className="uploader-content">
+                        <h2>Do you want to change your image?</h2>
+
+                        {/* <label htmlFor="file">Choose a file</label> */}
+                        <div class="upload-btn-wrapper">
+                            <button className="btn">Upload</button>
+                            <input
+                                type="file"
+                                name="file"
+                                accept="image/*"
+                                onChange={(e) => this.handleChange(e)}
+                            />
+                        </div>
+
+                        <button onClick={(e) => this.submit(e)} className="btn">
+                            Submit
+                        </button>
+                    </div>
                 </div>
-                <p>/Uploader</p>
             </>
         );
     }

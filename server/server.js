@@ -1,16 +1,21 @@
 const express = require("express");
 const app = express();
+
 const compression = require("compression");
 const path = require("path");
+
 const cookieSession = require("cookie-session");
 const { COOKIE_SECRET } = require("../secrets.json");
 const csurf = require("csurf");
+
 const { hash, compare } = require("./bc");
 const db = require("./db");
+
 const cryptoRandomString = require("crypto-random-string");
 const { sendEmail } = require("./ses");
 const s3 = require("./s3");
 const { s3Url } = require("./config.json");
+
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 
@@ -213,12 +218,43 @@ app.post("/password/reset/verify", (req, res) => {
 //POST UPLOAD PROFPIC --> /upload
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     console.log("POST /upload made!!");
-    console.log("req.file", req.file);
+    // console.log("req.body", req.body);
+    // console.log("req.file", req.file);
     if (req.file) {
         const { filename } = req.file;
         const fullUrl = s3Url + filename;
-        console.log("fullUrl", fullUrl);
+        // console.log("fullUrl", fullUrl);
+        // console.log("req.session", req.session);
+        const { userId } = req.session;
+        db.uploadProfilePic(fullUrl, userId)
+            .then((result) => {
+                // console.log("result.rows: ", result.rows);
+                res.json(result.rows[0]);
+            })
+            .catch((err) => {
+                console.log("Error in POST /upload", err);
+            });
     }
+});
+
+//GET USER INFO --> /user
+app.get("/user", (req, res) => {
+    console.log("GET user made!");
+    // console.log("req.session", req.session);
+    const { userId } = req.session;
+    db.getUserInformation(userId)
+        .then((result) => {
+            // console.log("result.rows", result.rows);
+            res.json(result.rows[0]);
+        })
+        .catch((err) => {
+            console.log("Error in GET /user", err);
+        });
+});
+
+//POST UPDATE BIO -->
+app.post("/update-bio", (req, res) => {
+    console.log("POST /update-bio made!!");
 });
 
 app.get("*", function (req, res) {

@@ -36,3 +36,9 @@ module.exports.uploadProfilePic = (fullUrl, userId) => {
     const params = [fullUrl, userId];
     return db.query(q, params);
 };
+
+module.exports.getUserInformation = (userId) => {
+    const q = `SELECT * FROM users WHERE id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};

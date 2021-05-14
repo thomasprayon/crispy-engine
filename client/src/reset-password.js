@@ -71,26 +71,28 @@ export default class ResetPassword extends Component {
     determineViewToRender() {
         if (this.state.view === 1) {
             return (
-                <div>
-                    {this.state.error && (
-                        <p className="error">
-                            Oops! Something went wrong, try again!!
-                        </p>
-                    )}
-                    <h3>Please enter your email to change password</h3>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <button
-                        onClick={(e) => this.submitEmail(e)}
-                        className="register-btn"
-                    >
-                        Submit
-                    </button>
-                </div>
+                <>
+                    <div className="reset-password-container">
+                        {this.state.error && (
+                            <p className="error">
+                                Oops! Something went wrong, try again!!
+                            </p>
+                        )}
+                        <h3>Please enter your email to change password</h3>
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                        <button
+                            onClick={(e) => this.submitEmail(e)}
+                            className="register-btn"
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </>
             );
         } else if (this.state.view === 2) {
             return (

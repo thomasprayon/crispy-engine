@@ -7,9 +7,8 @@ import ResetPassword from "./reset-password";
 export default function Welcome() {
     return (
         <div className="welcome-container">
-            <h1>Welcome to ExpSwap</h1>
             <Logo />
-            <h3>Where you can exchange you're knowledge with others</h3>
+            <h3>Where you can exchange your knowledge with others</h3>
             <HashRouter>
                 <div>
                     <Route exact path="/" component={Registration} />

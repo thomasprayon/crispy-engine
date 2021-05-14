@@ -1,8 +1,3 @@
 export default function Logo() {
-    return (
-        <img
-            src="http://mindmapcharts.com/images/WorkInProgress.jpg"
-            className="temp-logo"
-        />
-    );
+    return <img src="/images/logo200.png" className="logo-logout" />;
 }
