@@ -31,7 +31,6 @@ app.use(csurf());
 app.use(function (req, res, next) {
     res.setHeader("x-frame-options", "deny");
     res.cookie("mytoken", req.csrfToken());
-    // console.log("req.csrfToken: ", req.csrfToken());
     next();
 });
 
@@ -40,6 +39,7 @@ app.use(
         extended: false,
     })
 );
+
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, __dirname + "/uploads");
@@ -255,7 +255,18 @@ app.get("/user", (req, res) => {
 //POST UPDATE BIO -->
 app.post("/update-bio", (req, res) => {
     console.log("POST /update-bio made!!");
-    console.log("req.body", req.body);
+    // console.log("req.body", req.body);
+    // console.log("req.session", req.session);
+    const { bio } = req.body;
+    const { userId } = req.session;
+    db.updateBio(bio, userId)
+        .then((result) => {
+            // console.log("result.rows", result.rows);
+            res.json(result.rows[0]);
+        })
+        .catch((err) => {
+            console.log("Error in POST /update-bio", err);
+        });
 });
 
 app.get("*", function (req, res) {

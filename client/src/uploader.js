@@ -27,7 +27,7 @@ export default class Uploader extends Component {
             .then((response) => {
                 // console.log("response.data: ", response.data);
                 const { img_url } = response.data;
-                console.log("img_url: ", img_url);
+                // console.log("img_url: ", img_url);
                 this.props.updateProfilePic(img_url);
             })
             .catch((err) => {

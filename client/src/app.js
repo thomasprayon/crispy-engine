@@ -13,6 +13,7 @@ export default class App extends Component {
         };
         this.toggleUploader = this.toggleUploader.bind(this);
         this.updateProfilePic = this.updateProfilePic.bind(this);
+        this.setBio = this.setBio.bind(this);
     }
     componentDidMount() {
         console.log("App just mounted!");
@@ -40,6 +41,7 @@ export default class App extends Component {
         this.toggleUploader();
     }
     setBio(newBio) {
+        console.log("I'm running in App");
         this.setState({
             bio: newBio,
         });
@@ -65,7 +67,7 @@ export default class App extends Component {
                     <Profile
                         firstName={this.state.firstName}
                         lastName={this.state.lastName}
-                        imgUrl={this.state.img || "/images/user_default.png"}
+                        imgUrl={this.state.imgUrl || "/images/user_default.png"}
                         bio={this.state.bio}
                         setBio={this.setBio}
                     />
