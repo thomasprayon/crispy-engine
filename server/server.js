@@ -252,7 +252,7 @@ app.get("/user", (req, res) => {
         });
 });
 
-//POST UPDATE BIO -->
+//POST UPDATE BIO --> /update-bio
 app.post("/update-bio", (req, res) => {
     console.log("POST /update-bio made!!");
     // console.log("req.body", req.body);
@@ -267,6 +267,13 @@ app.post("/update-bio", (req, res) => {
         .catch((err) => {
             console.log("Error in POST /update-bio", err);
         });
+});
+
+//LOGOUT --> /logout
+app.get("/logout", (req, res) => {
+    console.log("GET /logout made!!");
+    req.session.userId = null;
+    res.redirect("/welcome");
 });
 
 app.get("*", function (req, res) {

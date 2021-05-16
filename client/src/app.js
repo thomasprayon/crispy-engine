@@ -1,8 +1,8 @@
 import { Component } from "react";
-import Logo from "./logo";
 import Uploader from "./uploader";
 import ProfilePic from "./profile-pic";
 import Profile from "./profile";
+import NavBar from "./nav-bar";
 import axios from "./axios";
 
 export default class App extends Component {
@@ -58,6 +58,10 @@ export default class App extends Component {
                             className="logo-header"
                         />
                     </header>
+                    <NavBar
+                        firstName={this.state.firstName}
+                        lastName={this.state.lastName}
+                    />
                     <ProfilePic
                         firstName={this.state.firstName}
                         lastName={this.state.lastName}

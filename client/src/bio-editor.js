@@ -7,6 +7,7 @@ export default class BioEditor extends Component {
         this.state = {
             showTextArea: false,
             draftBio: "",
+            showButtons: true,
         };
     }
     handleChange({ target }) {
@@ -20,20 +21,24 @@ export default class BioEditor extends Component {
         console.log("toggleBio is here");
         this.setState({
             showTextArea: !this.state.showTextArea,
+            showButtons: !this.state.showButtons,
         });
     }
-
     submitBio(e) {
         // console.log("event submit bio", e);
         e.preventDefault();
-        console.log("this.state", this.state);
-        console.log("this.state.draftBio", this.state.draftBio);
+        // console.log("this.state", this.state);
+        // console.log("this.state.draftBio", this.state.draftBio);
+        if (!this.state.draftBio) {
+            this.toggleBio();
+            return;
+        }
         axios
             .post("/update-bio", {
                 bio: this.state.draftBio,
             })
             .then((response) => {
-                console.log("response.data", response.data);
+                // console.log("response.data", response.data);
                 const { bio } = response.data;
                 this.props.setBio(bio);
                 this.toggleBio();
@@ -45,7 +50,7 @@ export default class BioEditor extends Component {
     render() {
         return (
             <>
-                {!this.props.bio && (
+                {!this.props.bio && this.state.showButtons && (
                     <>
                         <p></p>
                         <a
@@ -56,7 +61,7 @@ export default class BioEditor extends Component {
                         </a>
                     </>
                 )}
-                {this.props.bio && (
+                {this.props.bio && this.state.showButtons && (
                     <>
                         <p>{this.props.bio}</p>
                         <button onClick={() => this.toggleBio()}>
