@@ -276,6 +276,35 @@ app.get("/logout", (req, res) => {
     res.redirect("/welcome");
 });
 
+//OTHER PROFILE --> /other-user/:id
+app.get("/other-user/:id", (req, res) => {
+    console.log("GET /other-user/:id");
+    // console.log("req.params: ", req.params);
+    // console.log("req.session: ", req.session);
+    const { id } = req.params;
+    const { userId } = req.session;
+    if (parseInt(id) === userId) {
+        res.json({
+            error: "UserId and Id are the same",
+        });
+    } else {
+        db.getOtherUsers(id)
+            .then((result) => {
+                // console.log("result getOtherUser: ", result);
+                if (result.rows.length === 0) {
+                    res.json({
+                        error: "User is trying to enter a no valid url",
+                    });
+                } else {
+                    res.json(result.rows[0]);
+                }
+            })
+            .catch((err) => {
+                console.log("Error in GET /other-user/:id", err);
+            });
+    }
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");

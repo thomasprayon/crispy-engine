@@ -185,6 +185,11 @@ input:focus {
     justify-content: center;
     margin-left: 3rem;
 }
+.edit-btn {
+    display: contents;
+    background-color: transparent;
+    border: none;
+}
 
 /* NAVBAR */
 .navbar-container {

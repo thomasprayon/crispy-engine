@@ -5,7 +5,7 @@ export default function ProfilePic(props) {
                 <img
                     className="profile-picture-img"
                     src={props.imgUrl}
-                    alt={`${props.firstName} + ${props.lastName}`}
+                    alt={`${props.firstName}  ${props.lastName}`}
                     onClick={props.toggleUploader}
                 />
             </div>
