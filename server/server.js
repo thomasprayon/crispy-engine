@@ -278,7 +278,7 @@ app.get("/logout", (req, res) => {
 
 //OTHER PROFILE --> /other-user/:id
 app.get("/other-user/:id", (req, res) => {
-    console.log("GET /other-user/:id");
+    console.log("GET /other-user/:id was made");
     // console.log("req.params: ", req.params);
     // console.log("req.session: ", req.session);
     const { id } = req.params;
@@ -303,6 +303,24 @@ app.get("/other-user/:id", (req, res) => {
                 console.log("Error in GET /other-user/:id", err);
             });
     }
+});
+
+// GET FIND USERS (NEWEST USERS) --> /find-users
+app.get("/find-users", (req, res) => {
+    console.log("GET /find/users was made");
+    db.getNewestUsers()
+        .then((result) => {
+            // console.log("result.rows", result.rows);
+            res.json(result.rows);
+        })
+        .catch((err) => {
+            console.log("Error in GET /find/users", err);
+        });
+});
+
+// GET FIND USERS (FIND OTHER USERS)
+app.get("/find-users/:id", (req, res) => {
+    console.log("GET /find-users/:id was made");
 });
 
 app.get("*", function (req, res) {

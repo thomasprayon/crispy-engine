@@ -159,8 +159,8 @@ input:focus {
 
 /* PROFILE STYLING */
 .profile-img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     border: 2px solid black;
     object-fit: contain;
@@ -216,4 +216,20 @@ ul.breadcrumb li a {
 
 ul.breadcrumb li a:hover {
     color: #01447e;
+}
+
+/* SEARCH */
+.findPeople-container {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    width: 100%;
+}
+.result-findPeople {
+    display: flex;
+    flex-direction: row;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    width: 50%;
+    border: 2px solid violet;
 }

@@ -6,6 +6,7 @@ import NavBar from "./nav-bar";
 import axios from "./axios";
 import OtherProfile from "./other-profile";
 import { BrowserRouter, Route } from "react-router-dom";
+import FindPeople from "./find-people";
 
 export default class App extends Component {
     constructor() {
@@ -88,6 +89,7 @@ export default class App extends Component {
                             )}
                         />
                         <Route path="/user/:id" component={OtherProfile} />
+                        <Route path="/find/user" component={FindPeople} />
                     </BrowserRouter>
 
                     {this.state.uploaderIsVisible && (

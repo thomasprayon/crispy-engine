@@ -42,13 +42,20 @@ module.exports.getUserInformation = (userId) => {
     const params = [userId];
     return db.query(q, params);
 };
+
 module.exports.updateBio = (bio, id) => {
     const q = `UPDATE users SET bio = $1 WHERE id = $2 RETURNING *`;
     const params = [bio, id];
     return db.query(q, params);
 };
+
 module.exports.getOtherUsers = (userId) => {
     const q = `SELECT first_name, last_name, img_url, bio FROM users WHERE id = $1`;
     const params = [userId];
     return db.query(q, params);
+};
+
+module.exports.getNewestUsers = () => {
+    const q = `SELECT first_name, last_name, img_url FROM users ORDER BY id DESC LIMIT 3`;
+    return db.query(q);
 };
