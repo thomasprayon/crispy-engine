@@ -18,6 +18,26 @@ export default function FindPeople() {
             });
     }, []);
 
+    useEffect(() => {
+        console.log("useEffect just ran /find-users/:id!");
+        // console.log("searchInput", searchInput);
+        let ignore = false;
+        axios
+            .get("/find-users/" + searchInput)
+            .then((data) => {
+                // console.log("response /find-user/:id ", data.data);
+                if (!ignore) {
+                    setUsers(data.data);
+                }
+            })
+            .catch((err) => {
+                console.log("Error in /find-users/:id", err);
+            });
+        return () => {
+            ignore = true;
+        };
+    }, [searchInput]);
+
     const handleChange = ({ target }) => {
         setSearchInput(target.value);
     };
@@ -27,7 +47,6 @@ export default function FindPeople() {
             <div className="findPeople-container">
                 <h2>Find People:</h2>
                 <input onChange={handleChange} placeholder="Find people..." />
-
                 {users.map((user, index) => {
                     // console.log("user", user);
                     return (

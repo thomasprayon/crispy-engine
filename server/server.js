@@ -321,6 +321,16 @@ app.get("/find-users", (req, res) => {
 // GET FIND USERS (FIND OTHER USERS)
 app.get("/find-users/:id", (req, res) => {
     console.log("GET /find-users/:id was made");
+    console.log("req.params", req.params);
+    const { id } = req.params;
+    db.searchForUsersInformation(id)
+        .then((result) => {
+            // console.log("result.rows", result.rows);
+            res.json(result.rows);
+        })
+        .catch((err) => {
+            console.log("Error in GET /find-users/:id", err);
+        });
 });
 
 app.get("*", function (req, res) {

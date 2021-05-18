@@ -163,7 +163,7 @@ input:focus {
     height: 100px;
     border-radius: 50%;
     border: 2px solid black;
-    object-fit: contain;
+    object-fit: cover;
     background-color: whitesmoke;
 }
 .profile-container {
@@ -218,12 +218,12 @@ ul.breadcrumb li a:hover {
     color: #01447e;
 }
 
-/* SEARCH */
+/* SEARCH FRIENDS */
 .findPeople-container {
     position: absolute;
     top: 20%;
     left: 5%;
-    width: 100%;
+    width: 95%;
 }
 .result-findPeople {
     display: flex;
@@ -232,4 +232,5 @@ ul.breadcrumb li a:hover {
     border-radius: 10px;
     width: 50%;
     border: 2px solid violet;
+    margin-top: 1rem;
 }

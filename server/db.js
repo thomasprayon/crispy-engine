@@ -59,3 +59,9 @@ module.exports.getNewestUsers = () => {
     const q = `SELECT first_name, last_name, img_url FROM users ORDER BY id DESC LIMIT 3`;
     return db.query(q);
 };
+
+module.exports.searchForUsersInformation = (searchInput) => {
+    const q = `SELECT first_name, last_name, img_url FROM users WHERE first_name ILIKE $1`;
+    const params = [`${searchInput}%`];
+    return db.query(q, params);
+};
