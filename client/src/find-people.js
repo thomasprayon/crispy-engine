@@ -49,10 +49,10 @@ export default function FindPeople() {
                 <h2>Find People:</h2>
                 <input onChange={handleChange} placeholder="Find people..." />
                 {users.map((user, index) => {
-                    // console.log("user", user);
+                    console.log("user", user);
                     return (
                         <div key={index} className="result-findPeople">
-                            <Link to="/user/:id">
+                            <Link to={`/user/${user.id}`}>
                                 <img
                                     src={user.img_url}
                                     className="profile-img"
