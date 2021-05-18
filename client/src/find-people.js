@@ -7,7 +7,7 @@ export default function FindPeople() {
     const [searchInput, setSearchInput] = useState("");
 
     useEffect(() => {
-        console.log("useEffect just ran for /find/users");
+        // console.log("useEffect just ran for /find/users");
         axios
             .get("/find-users")
             .then((data) => {
@@ -20,7 +20,7 @@ export default function FindPeople() {
     }, []);
 
     useEffect(() => {
-        console.log("useEffect just ran /find-users/:id!");
+        // console.log("useEffect just ran /find-users/:id!");
         // console.log("searchInput", searchInput);
         let ignore = false;
         axios

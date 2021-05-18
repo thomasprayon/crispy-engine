@@ -65,3 +65,8 @@ module.exports.searchForUsersInformation = (searchInput) => {
     const params = [`${searchInput}%`];
     return db.query(q, params);
 };
+
+module.exports.friendshipStatus = () => {
+    const q = `SELECT * FROM friendships WHERE (recipient_id = $1 AND sender_id = $2) OR (recipient_id = $2 AND sender_id = $1)`;
+    return db.query(q);
+};

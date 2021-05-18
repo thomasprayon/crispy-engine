@@ -333,6 +333,16 @@ app.get("/find-users/:id", (req, res) => {
         });
 });
 
+// GET FRIENDSTATUS (FRIEND REQUESTS)
+app.get("/friend-status/:id", (req, res) => {
+    console.log("GET /friend-status/:id was made");
+});
+
+//POST FRIENDSTATUS (FRIEND REQUESTS)
+app.post("/friend-status/:id", (req, res) => {
+    console.log("POST /friend-status/:id was made");
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");

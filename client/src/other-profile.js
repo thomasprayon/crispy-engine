@@ -1,5 +1,6 @@
 import { Component } from "react";
 import axios from "./axios";
+import FriendButton from "./friend-button";
 
 export default class OtherProfile extends Component {
     constructor() {
@@ -9,6 +10,7 @@ export default class OtherProfile extends Component {
     componentDidMount() {
         console.log("Other Profile is mounted!!");
         const id = this.props.match.params.id;
+        // console.log("this.props.match.params.id", id);
         axios
             .get(`/other-user/${id}`)
             .then((response) => {
@@ -42,6 +44,7 @@ export default class OtherProfile extends Component {
                             {this.state.firstName} {this.state.lastName}
                         </h2>
                         <p>{this.state.bio}</p>
+                        <FriendButton viewerId={this.props.match.params.id} />
                     </div>
                 </div>
             </>
