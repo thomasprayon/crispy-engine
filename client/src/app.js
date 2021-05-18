@@ -53,25 +53,27 @@ export default class App extends Component {
     render() {
         return (
             <>
-                <div className="main-container">
-                    <header>
-                        <img
-                            src="/images/part1Crop.png"
-                            alt="logo"
-                            className="logo-header"
+                <BrowserRouter>
+                    <div className="main-container">
+                        <header>
+                            <img
+                                src="/images/part1Crop.png"
+                                alt="logo"
+                                className="logo-header"
+                            />
+                        </header>
+                        <NavBar
+                            firstName={this.state.firstName}
+                            lastName={this.state.lastName}
                         />
-                    </header>
-                    <NavBar
-                        firstName={this.state.firstName}
-                        lastName={this.state.lastName}
-                    />
-                    <ProfilePic
-                        firstName={this.state.firstName}
-                        lastName={this.state.lastName}
-                        imgUrl={this.state.imgUrl || "/images/user_default.png"}
-                        toggleUploader={this.toggleUploader}
-                    />
-                    <BrowserRouter>
+                        <ProfilePic
+                            firstName={this.state.firstName}
+                            lastName={this.state.lastName}
+                            imgUrl={
+                                this.state.imgUrl || "/images/user_default.png"
+                            }
+                            toggleUploader={this.toggleUploader}
+                        />
                         <Route
                             exact
                             path="/"
@@ -90,15 +92,15 @@ export default class App extends Component {
                         />
                         <Route path="/user/:id" component={OtherProfile} />
                         <Route path="/find/user" component={FindPeople} />
-                    </BrowserRouter>
 
-                    {this.state.uploaderIsVisible && (
-                        <Uploader
-                            updateProfilePic={this.updateProfilePic}
-                            toggleUploader={this.toggleUploader}
-                        />
-                    )}
-                </div>
+                        {this.state.uploaderIsVisible && (
+                            <Uploader
+                                updateProfilePic={this.updateProfilePic}
+                                toggleUploader={this.toggleUploader}
+                            />
+                        )}
+                    </div>
+                </BrowserRouter>
             </>
         );
     }

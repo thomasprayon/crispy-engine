@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default function FindPeople() {
     const [users, setUsers] = useState([]);
@@ -51,10 +52,15 @@ export default function FindPeople() {
                     // console.log("user", user);
                     return (
                         <div key={index} className="result-findPeople">
-                            <img src={user.img_url} className="profile-img" />
-                            <p>
-                                {user.first_name} {user.last_name}
-                            </p>
+                            <Link to="/user/:id">
+                                <img
+                                    src={user.img_url}
+                                    className="profile-img"
+                                />
+                                <p>
+                                    {user.first_name} {user.last_name}
+                                </p>
+                            </Link>
                         </div>
                     );
                 })}
