@@ -21,7 +21,7 @@ export default class App extends Component {
     componentDidMount() {
         console.log("App just mounted!");
         axios.get("/user").then((response) => {
-            console.log("response.data", response.data);
+            // console.log("response.data", response.data);
             this.setState({
                 firstName: response.data.first_name,
                 lastName: response.data.last_name,

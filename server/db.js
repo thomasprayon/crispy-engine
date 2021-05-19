@@ -66,7 +66,26 @@ module.exports.searchForUsersInformation = (searchInput) => {
     return db.query(q, params);
 };
 
-module.exports.friendshipStatus = () => {
+module.exports.friendshipStatus = (loggedUser, viewedUser) => {
     const q = `SELECT * FROM friendships WHERE (recipient_id = $1 AND sender_id = $2) OR (recipient_id = $2 AND sender_id = $1)`;
-    return db.query(q);
+    const params = [loggedUser, viewedUser];
+    return db.query(q, params);
+};
+
+module.exports.makeFriendRequest = (loggedUser, viewedUser) => {
+    const q = `INSERT INTO friendships WHERE (recipient_id = $1 AND sender_id = $2) RETURNING *`;
+    const params = [loggedUser, viewedUser];
+    return db.query(q, params);
+};
+
+module.exports.acceptFriendRequest = (loggedUser, viewedUser) => {
+    const q = `UPDATE FROM friendships SET accepted = 'true' WHERE sender_id = $2 AND recipient_id = $1 RETURNING * `;
+    const params = [loggedUser, viewedUser];
+    return db.query(q, params);
+};
+
+module.exports.deleteFriendshipStatus = (loggedUser, viewedUser) => {
+    const q = `DELETE FROM friendships WHERE (recipient_id = $1 AND sender_id = $2) OR (recipient_id = $2 AND sender_id = $1)`;
+    const params = [loggedUser, viewedUser];
+    return db.query(q, params);
 };

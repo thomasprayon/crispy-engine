@@ -336,11 +336,32 @@ app.get("/find-users/:id", (req, res) => {
 // GET FRIENDSTATUS (FRIEND REQUESTS)
 app.get("/friend-status/:id", (req, res) => {
     console.log("GET /friend-status/:id was made");
+    // console.log("req.session.userId: ", req.session.userId);
+    // console.log("req.params.id: ", req.params.id);
+    const loggedUser = req.session.userId;
+    // console.log("loggedUser :", loggedUser);
+    const viewedUser = req.params.id;
+    // console.log("viewedUser: ", viewedUser);
+    db.friendshipStatus(loggedUser, viewedUser)
+        .then((result) => {
+            console.log("result.rows", result.rows);
+            res.json(result);
+        })
+        .catch((err) => {
+            console.log("Error in GET /friend-status/:id", err);
+        });
 });
 
 //POST FRIENDSTATUS (FRIEND REQUESTS)
 app.post("/friend-status/:id", (req, res) => {
     console.log("POST /friend-status/:id was made");
+    const loggedUser = req.session.userId;
+    console.log("loggedUser :", loggedUser);
+    const viewedUser = req.params.id;
+    console.log("viewedUser: ", viewedUser);
+    // console.log("req.body", req.body);
+    const { btnText } = req.body;
+    console.log("btn.text: ", btnText);
 });
 
 app.get("*", function (req, res) {

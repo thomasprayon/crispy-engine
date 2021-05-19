@@ -1,22 +1,34 @@
 import { useState, useEffect } from "react";
 import axios from "./axios";
 
-export default function FriendButton(viewerId) {
+export default function FriendButton({ viewerId }) {
     const [buttonText, setButtonText] = useState("");
-    console.log("viewerId", viewerId);
+
+    console.log("viewerId: ", viewerId);
 
     useEffect(() => {
         console.log("useEffect just run in FriendButton!");
-        axios.get("friend-status/:id").then((response) => {
-            console.log("response", response);
-        });
+        axios
+            .get("/friend-status/" + viewerId)
+            .then((response) => {
+                console.log("GET response.data: ", response.data);
+            })
+            .catch((err) => {
+                console.log("Error in GET axios /friend-status/:id", err);
+            });
     });
 
     const handleSubmit = (e) => {
+        console.log("handleSubmit in friend-button working!");
         e.preventDefault;
-        axios.post("friend-status/:id").then((response) => {
-            console.log("response", response);
-        });
+        axios
+            .post("/friend-status/" + viewerId)
+            .then((response) => {
+                console.log("POST response.data: ", response.data);
+            })
+            .catch((err) => {
+                console.log("Error in POST axios /friend-status/:id", err);
+            });
     };
 
     return (
