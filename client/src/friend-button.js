@@ -10,8 +10,9 @@ export default function FriendButton({ viewerId }) {
         console.log("useEffect just run in FriendButton!");
         axios
             .get("/friend-status/" + viewerId)
-            .then((response) => {
-                console.log("GET response.data: ", response.data);
+            .then(({ data }) => {
+                console.log("GET response.data: ", data);
+                setButtonText(data.btnText);
             })
             .catch((err) => {
                 console.log("Error in GET axios /friend-status/:id", err);
@@ -24,7 +25,7 @@ export default function FriendButton({ viewerId }) {
         axios
             .post("/friend-status/" + viewerId)
             .then((response) => {
-                console.log("POST response.data: ", response.data);
+                // console.log("POST response.data: ", response.data);
             })
             .catch((err) => {
                 console.log("Error in POST axios /friend-status/:id", err);
@@ -33,9 +34,7 @@ export default function FriendButton({ viewerId }) {
 
     return (
         <>
-            <button onClick={(e) => handleSubmit(e)}>
-                Button should change!
-            </button>
+            <button onClick={(e) => handleSubmit(e)}>{buttonText}</button>
         </>
     );
 }

@@ -344,8 +344,15 @@ app.get("/friend-status/:id", (req, res) => {
     // console.log("viewedUser: ", viewedUser);
     db.friendshipStatus(loggedUser, viewedUser)
         .then((result) => {
-            console.log("result.rows", result.rows);
-            res.json(result);
+            // console.log("result.rows", result.rows);
+            console.log("result.rows.length", result.rows.length);
+            if (result.rows.length === 0) {
+                res.json({
+                    success: true,
+                    btnText: "Add Friend",
+                });
+            }
+            // res.json(result);
         })
         .catch((err) => {
             console.log("Error in GET /friend-status/:id", err);
