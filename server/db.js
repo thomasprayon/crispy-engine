@@ -73,7 +73,7 @@ module.exports.friendshipStatus = (loggedUser, viewedUser) => {
 };
 
 module.exports.makeFriendRequest = (loggedUser, viewedUser) => {
-    const q = `INSERT INTO friendships WHERE (recipient_id = $1 AND sender_id = $2) RETURNING *`;
+    const q = `INSERT INTO friendships (recipient_id, sender_id) VALUES ($1, $2) RETURNING *`;
     const params = [loggedUser, viewedUser];
     return db.query(q, params);
 };

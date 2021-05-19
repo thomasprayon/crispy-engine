@@ -344,15 +344,36 @@ app.get("/friend-status/:id", (req, res) => {
     // console.log("viewedUser: ", viewedUser);
     db.friendshipStatus(loggedUser, viewedUser)
         .then((result) => {
-            // console.log("result.rows", result.rows);
+            console.log("result.rows", result.rows);
             console.log("result.rows.length", result.rows.length);
+            console.log("result.rows[0].accepted: ", result.rows[0].accepted);
+            //if the result is an empty[] then "Add Friend"
+            //if accepted = false --> "Cancel or Accept Friend Request"
+            //depens on the receiver of the friend reqeuest === userId(loggedUser) --> should render "Accept" or "Cancel" if they send it
+            //if accepted = true --> should render "End Friendship"
             if (result.rows.length === 0) {
                 res.json({
                     success: true,
                     btnText: "Add Friend",
                 });
+            } else if (result.rows[0].accepted === false) {
+                if (result.rows[0].recipient_id === loggedUser) {
+                    res.json({
+                        success: true,
+                        btnText: "Accept Friend Request",
+                    });
+                } else {
+                    res.json({
+                        success: true,
+                        btnText: "Cancel Friend Request",
+                    });
+                }
+            } else if (result.rows[0].accepted === true) {
+                res.json({
+                    success: true,
+                    btnText: "End Friendship",
+                });
             }
-            // res.json(result);
         })
         .catch((err) => {
             console.log("Error in GET /friend-status/:id", err);
@@ -369,6 +390,8 @@ app.post("/friend-status/:id", (req, res) => {
     // console.log("req.body", req.body);
     const { btnText } = req.body;
     console.log("btn.text: ", btnText);
+
+    //if it shows "Add Friend" --> should show on (loggedUser) =  "Cancel Request"
 });
 
 app.get("*", function (req, res) {

@@ -11,7 +11,7 @@ export default function FriendButton({ viewerId }) {
         axios
             .get("/friend-status/" + viewerId)
             .then(({ data }) => {
-                console.log("GET response.data: ", data);
+                console.log("GET data: ", data);
                 setButtonText(data.btnText);
             })
             .catch((err) => {
@@ -23,9 +23,9 @@ export default function FriendButton({ viewerId }) {
         console.log("handleSubmit in friend-button working!");
         e.preventDefault;
         axios
-            .post("/friend-status/" + viewerId)
-            .then((response) => {
-                // console.log("POST response.data: ", response.data);
+            .post("/friend-status/" + viewerId, { btnText: buttonText })
+            .then(({ data }) => {
+                console.log("POST data: ", data);
             })
             .catch((err) => {
                 console.log("Error in POST axios /friend-status/:id", err);
