@@ -26,6 +26,7 @@ export default function FriendButton({ viewerId }) {
             .post("/friend-status/" + viewerId, { btnText: buttonText })
             .then(({ data }) => {
                 console.log("POST data: ", data);
+                setButtonText(data.btnText);
             })
             .catch((err) => {
                 console.log("Error in POST axios /friend-status/:id", err);
