@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import Welcome from "./welcome";
-import App from "./app";
+import App from "./login/app";
 
 //we only call ReactDOM.render once in the whole project
 if (location.pathname == "/welcome") {

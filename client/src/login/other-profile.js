@@ -1,5 +1,5 @@
 import { Component } from "react";
-import axios from "./axios";
+import axios from "../axios";
 import FriendButton from "./friend-button";
 
 export default class OtherProfile extends Component {

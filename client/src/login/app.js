@@ -3,7 +3,7 @@ import Uploader from "./uploader";
 import ProfilePic from "./profile-pic";
 import Profile from "./profile";
 import NavBar from "./nav-bar";
-import axios from "./axios";
+import axios from "../axios";
 import OtherProfile from "./other-profile";
 import { BrowserRouter, Route } from "react-router-dom";
 import FindPeople from "./find-people";
