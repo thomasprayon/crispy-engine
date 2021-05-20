@@ -61,7 +61,7 @@ module.exports.getNewestUsers = () => {
 };
 
 module.exports.searchForUsersInformation = (searchInput) => {
-    const q = `SELECT id, first_name, last_name, img_url FROM users WHERE first_name ILIKE $1`;
+    const q = `SELECT id, first_name, last_name, img_url FROM users WHERE first_name ILIKE $1 LIMIT 8`;
     const params = [`${searchInput}%`];
     return db.query(q, params);
 };

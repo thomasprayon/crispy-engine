@@ -51,17 +51,16 @@ export default function FindPeople() {
                 {users.map((user, index) => {
                     // console.log("user", user);
                     return (
-                        <div key={index} className="result-findPeople">
-                            <Link to={`/user/${user.id}`}>
-                                <img
-                                    src={user.img_url}
-                                    className="profile-img"
-                                />
-                                <p>
-                                    {user.first_name} {user.last_name}
-                                </p>
-                            </Link>
-                        </div>
+                        <Link
+                            to={`/user/${user.id}`}
+                            key={index}
+                            className="result-findPeople"
+                        >
+                            <img src={user.img_url} className="profile-img" />
+                            <p>
+                                {user.first_name} {user.last_name}
+                            </p>
+                        </Link>
                     );
                 })}
             </div>

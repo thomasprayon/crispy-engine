@@ -345,35 +345,30 @@ app.get("/friend-status/:id", (req, res) => {
     db.friendshipStatus(loggedUser, viewedUser)
         .then((result) => {
             // console.log("result.rows", result.rows);
+            // console.log("result.rows[0] ", result.rows[0]);
             // console.log("result.rows.length", result.rows.length);
-            // console.log("result.rows[0].accepted: ", result.rows[0].accepted);
-
             //if the result is an empty[] then "Add Friend"
             //if accepted = false --> "Cancel or Accept Friend Request"
             //depens on the receiver of the friend reqeuest === userId(loggedUser) --> should render "Accept" or "Cancel" if they send it
             //if accepted = true --> should render "End Friendship"
             if (result.rows.length === 0) {
                 res.json({
-                    success: true,
-                    btnText: "Add Friend",
+                    buttonText: "Add Friend",
                 });
             }
             if (result.rows[0].accepted) {
                 res.json({
-                    success: true,
-                    btnText: "End Friendship",
+                    buttonText: "Unfriend",
                 });
             }
             if (!result.rows[0].accepted) {
                 if (result.rows[0].recipient_id === loggedUser) {
                     res.json({
-                        success: true,
-                        btnText: "Accept Friend Request",
+                        buttonText: "Cancel Request",
                     });
                 } else {
                     res.json({
-                        success: true,
-                        btnText: "Cancel Friend Request",
+                        buttonText: "Accept Request",
                     });
                 }
             }
@@ -391,24 +386,48 @@ app.post("/friend-status/:id", (req, res) => {
     const viewedUser = req.params.id;
     console.log("POST viewedUser: ", viewedUser);
     // console.log("req.body", req.body);
-    const { btnText } = req.body;
-    console.log("POST btn.text: ", btnText);
+    const { buttonText } = req.body;
+    // console.log("POST btn.text: ", buttonText);
     //if it shows "Add Friend" --> should show on (loggedUser) =  "Cancel Request"
     //if it shows "Accept Friend Request" --> should show on (loggedUser) = "End Friendship"
     //if it shows "End Friendship or "Cancel Friend Request" --> should show on (loggedUser) = "Add Friend"
-    if (btnText === "Add Friend") {
+    if (buttonText === "Add Friend") {
         db.makeFriendRequest(loggedUser, viewedUser)
             .then((result) => {
                 // console.log("result.rows", result.rows);
+                console.log("inside ADD FRIEND");
                 res.json({
-                    success: true,
+                    buttonText: "Cancel Request",
                     result: result.rows,
-                    btnText: "Cancel Request",
                 });
             })
             .catch((err) => {
                 console.log("Error in POST /friend-status/ AddFriend", err);
             });
+    }
+    if (buttonText === "Accept Request") {
+        db.acceptFriendRequest(loggedUser, viewedUser)
+            .then((result) => {
+                // console.log("result.rows: ", result.rows);
+                console.log("inside ACCEPT");
+                res.json({
+                    buttonText: "Unfriend",
+                    result: result.rows,
+                });
+            })
+            .catch((err) => {
+                console.log("Error in POST /friend-status/ AcceptFriend", err);
+            });
+    }
+    if (buttonText === "Cancel Request" || buttonText === "Unfriend") {
+        db.deleteFriendshipStatus(loggedUser, viewedUser).then((result) => {
+            // console.log("result.rows: ", result.rows);
+            console.log("inside CANCEL / END ");
+            res.json({
+                buttonText: "Add Friend",
+                result: result.rows,
+            });
+        });
     }
 });
 

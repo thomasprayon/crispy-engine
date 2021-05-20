@@ -52,7 +52,6 @@ export default class BioEditor extends Component {
             <>
                 {!this.props.bio && this.state.showButtons && (
                     <>
-                        <p></p>
                         <a
                             className="addBio-btn"
                             onClick={() => this.toggleBio()}
@@ -74,16 +73,18 @@ export default class BioEditor extends Component {
                 )}
                 {this.state.showTextArea && (
                     <>
-                        <textarea
-                            defaultValue={this.props.bio}
-                            onChange={(e) => this.handleChange(e)}
-                        ></textarea>
-                        <button onClick={(e) => this.submitBio(e)}>
-                            Submit
-                        </button>
-                        <button onClick={(e) => this.toggleBio(e)}>
-                            Cancel
-                        </button>
+                        <div>
+                            <textarea
+                                defaultValue={this.props.bio}
+                                onChange={(e) => this.handleChange(e)}
+                            ></textarea>
+                            <button onClick={(e) => this.submitBio(e)}>
+                                Submit
+                            </button>
+                            <button onClick={(e) => this.toggleBio(e)}>
+                                Cancel
+                            </button>
+                        </div>
                     </>
                 )}
             </>
