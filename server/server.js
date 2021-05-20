@@ -431,6 +431,12 @@ app.post("/friend-status/:id", (req, res) => {
     }
 });
 
+// GET FRIENDSORNOT (List of friends/Wannabe-friends)
+
+app.get("/friends-wannabes", (req, res) => {
+    console.log("GET /friends-wannabes made!!");
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");

@@ -15,6 +15,9 @@ export default function NavBar(props) {
                         <a href="/logout">Logout</a>
                     </li>
                     <li>
+                        <Link to="/friends-or-not">List of People</Link>
+                    </li>
+                    <li>
                         {props.firstName} {props.lastName}
                     </li>
                 </ul>

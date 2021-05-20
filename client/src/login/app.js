@@ -1,12 +1,13 @@
 import { Component } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 import Uploader from "./uploader";
 import ProfilePic from "./profile-pic";
 import Profile from "./profile";
 import NavBar from "./nav-bar";
 import axios from "../axios";
 import OtherProfile from "./other-profile";
-import { BrowserRouter, Route } from "react-router-dom";
 import FindPeople from "./find-people";
+import FriendsOrNot from "./friends";
 
 export default class App extends Component {
     constructor() {
@@ -92,6 +93,10 @@ export default class App extends Component {
                         />
                         <Route path="/user/:id" component={OtherProfile} />
                         <Route path="/find/user" component={FindPeople} />
+                        <Route
+                            path="/friends-or-not"
+                            component={FriendsOrNot}
+                        />
 
                         {this.state.uploaderIsVisible && (
                             <Uploader
