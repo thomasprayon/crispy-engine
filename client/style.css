@@ -234,3 +234,12 @@ ul.breadcrumb li a:hover {
     border: 2px solid violet;
     margin-top: 1rem;
 }
+
+/* FRIEND COMPONENT */
+.friends-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 15%;
+    left: 5%;
+}

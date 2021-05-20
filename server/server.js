@@ -351,18 +351,26 @@ app.get("/friend-status/:id", (req, res) => {
             //if accepted = false --> "Cancel or Accept Friend Request"
             //depens on the receiver of the friend reqeuest === userId(loggedUser) --> should render "Accept" or "Cancel" if they send it
             //if accepted = true --> should render "End Friendship"
+
             if (result.rows.length === 0) {
+                console.log("result.rows.length: ", result.rows.length);
                 res.json({
                     buttonText: "Add Friend",
                 });
             }
             if (result.rows[0].accepted) {
+                console.log("result.rows[0].accepted", result.rows[0].accepted);
                 res.json({
                     buttonText: "Unfriend",
                 });
             }
             if (!result.rows[0].accepted) {
-                if (result.rows[0].recipient_id === loggedUser) {
+                if (result.rows[0].sender_id == loggedUser) {
+                    console.log(
+                        "result.rows[0].recipiet_id: ",
+                        result.rows[0].sender_id
+                    );
+                    console.log("loggedUser: ", loggedUser);
                     res.json({
                         buttonText: "Cancel Request",
                     });
@@ -398,7 +406,6 @@ app.post("/friend-status/:id", (req, res) => {
                 console.log("inside ADD FRIEND");
                 res.json({
                     buttonText: "Cancel Request",
-                    result: result.rows,
                 });
             })
             .catch((err) => {
@@ -412,7 +419,7 @@ app.post("/friend-status/:id", (req, res) => {
                 console.log("inside ACCEPT");
                 res.json({
                     buttonText: "Unfriend",
-                    result: result.rows,
+                    success: true,
                 });
             })
             .catch((err) => {
@@ -425,16 +432,19 @@ app.post("/friend-status/:id", (req, res) => {
             console.log("inside CANCEL / END ");
             res.json({
                 buttonText: "Add Friend",
-                result: result.rows,
+                success: true,
             });
         });
     }
 });
 
 // GET FRIENDSORNOT (List of friends/Wannabe-friends)
-
 app.get("/friends-wannabes", (req, res) => {
     console.log("GET /friends-wannabes made!!");
+    console.log("req.session.userId", req.session.userId);
+    db.getFriendsAndWannabes().then((result) => {
+        console.log("result.rows: ", result.rows);
+    });
 });
 
 app.get("*", function (req, res) {

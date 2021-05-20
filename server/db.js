@@ -79,7 +79,7 @@ module.exports.makeFriendRequest = (loggedUser, viewedUser) => {
 };
 
 module.exports.acceptFriendRequest = (loggedUser, viewedUser) => {
-    const q = `UPDATE friendships SET accepted = 'true' WHERE sender_id = $2 AND recipient_id = $1 RETURNING * `;
+    const q = `UPDATE friendships SET accepted = true WHERE sender_id = $2 AND recipient_id = $1 RETURNING * `;
     const params = [loggedUser, viewedUser];
     return db.query(q, params);
 };
@@ -87,5 +87,16 @@ module.exports.acceptFriendRequest = (loggedUser, viewedUser) => {
 module.exports.deleteFriendshipStatus = (loggedUser, viewedUser) => {
     const q = `DELETE FROM friendships WHERE (recipient_id = $1 AND sender_id = $2) OR (recipient_id = $2 AND sender_id = $1)`;
     const params = [loggedUser, viewedUser];
+    return db.query(q, params);
+};
+
+module.exports.getFriendsAndWannabes = (loggedUser) => {
+    const q = `SELECT users.id, first_name, last_name, img_url, accepted
+                FROM friendships
+                JOIN users
+                ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
+                OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
+                OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)`;
+    const params = [loggedUser];
     return db.query(q, params);
 };
