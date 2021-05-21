@@ -461,10 +461,7 @@ app.get("/friends-wannabes", (req, res) => {
     db.getFriendsAndWannabes(loggedUser)
         .then((result) => {
             // console.log("result.rows: ", result.rows);
-            res.json({
-                success: true,
-                result: result.rows,
-            });
+            res.json(result.rows);
         })
         .catch((err) => {
             console.log("Error in GET /friends-wannabes", err);

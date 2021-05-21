@@ -4,10 +4,10 @@ export function getFriendsAndWannabes() {
     return axios
         .get("/friends-wannabes")
         .then(({ data }) => {
-            console.log("data.result: ", data.result);
+            console.log("data: ", data);
             return {
                 type: "FRIENDS_AND_WANNABES",
-                users: data.result,
+                users: data,
             };
         })
         .catch((err) => {

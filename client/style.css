@@ -236,10 +236,29 @@ ul.breadcrumb li a:hover {
 }
 
 /* FRIEND COMPONENT */
-.friends-container {
+.friends-big-container {
     display: flex;
-    flex-direction: column;
     position: absolute;
     top: 15%;
     left: 5%;
+}
+.friend-container {
+    display: flex;
+    flex-direction: column;
+}
+.friends-friends-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+}
+.person-friend-text {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    flex-direction: column;
+    justify-content: center;
+}
+.requests-container {
+    position: relative;
+    left: 25%;
 }
