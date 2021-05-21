@@ -48,6 +48,7 @@ export default function FindPeople() {
             <div className="findPeople-container">
                 <h2>Find People:</h2>
                 <input onChange={handleChange} placeholder="Find people..." />
+                {!searchInput && <p>Last people who join!</p>}
                 {users.map((user, index) => {
                     // console.log("user", user);
                     return (

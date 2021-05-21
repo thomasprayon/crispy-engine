@@ -342,9 +342,9 @@ app.get("/friend-status/:id", (req, res) => {
     // console.log("loggedUser :", loggedUser);
     const viewedUser = req.params.id;
     // console.log("viewedUser: ", viewedUser);
-    db.friendshipStatus(loggedUser, viewedUser)
+    db.friendshipStatus(viewedUser, loggedUser)
         .then((result) => {
-            // console.log("result.rows", result.rows);
+            console.log("result.rows", result.rows);
             // console.log("result.rows[0] ", result.rows[0]);
             // console.log("result.rows.length", result.rows.length);
             //if the result is an empty[] then "Add Friend"
@@ -365,12 +365,23 @@ app.get("/friend-status/:id", (req, res) => {
                 });
             }
             if (!result.rows[0].accepted) {
-                if (result.rows[0].sender_id == loggedUser) {
-                    console.log(
-                        "result.rows[0].recipiet_id: ",
-                        result.rows[0].sender_id
-                    );
-                    console.log("loggedUser: ", loggedUser);
+                console.log(
+                    "result.rows[0].sender_id",
+                    result.rows[0].sender_id
+                );
+                console.log("loggedUser", loggedUser);
+                if (result.rows[0].recipient_id === loggedUser) {
+                    // console.log(
+                    //     "result.rows[0].recipient_id: ",
+                    //     result.rows[0].recipient_id
+                    // );
+                    // console.log(
+                    //     "result.rows[0].sender_id: ",
+                    //     result.rows[0].sender_id
+                    // );
+                    // console.log("loggedUser is: ", loggedUser);
+                    // console.log("viewedUser is: ", viewedUser);
+
                     res.json({
                         buttonText: "Cancel Request",
                     });
@@ -390,9 +401,9 @@ app.get("/friend-status/:id", (req, res) => {
 app.post("/friend-status/:id", (req, res) => {
     console.log("POST /friend-status/:id was made");
     const loggedUser = req.session.userId;
-    console.log("POST loggedUser :", loggedUser);
+    // console.log("POST loggedUser :", loggedUser);
     const viewedUser = req.params.id;
-    console.log("POST viewedUser: ", viewedUser);
+    // console.log("POST viewedUser: ", viewedUser);
     // console.log("req.body", req.body);
     const { buttonText } = req.body;
     // console.log("POST btn.text: ", buttonText);
@@ -402,10 +413,12 @@ app.post("/friend-status/:id", (req, res) => {
     if (buttonText === "Add Friend") {
         db.makeFriendRequest(loggedUser, viewedUser)
             .then((result) => {
-                // console.log("result.rows", result.rows);
+                console.log("result.rows", result.rows);
                 console.log("inside ADD FRIEND");
                 res.json({
+                    success: true,
                     buttonText: "Cancel Request",
+                    // result: result.rows[0].accepted,
                 });
             })
             .catch((err) => {
@@ -420,6 +433,7 @@ app.post("/friend-status/:id", (req, res) => {
                 res.json({
                     buttonText: "Unfriend",
                     success: true,
+                    // result: result.rows[0].accepted,
                 });
             })
             .catch((err) => {
@@ -433,6 +447,7 @@ app.post("/friend-status/:id", (req, res) => {
             res.json({
                 buttonText: "Add Friend",
                 success: true,
+                // result: result.rows[0].accepted,
             });
         });
     }
@@ -441,10 +456,19 @@ app.post("/friend-status/:id", (req, res) => {
 // GET FRIENDSORNOT (List of friends/Wannabe-friends)
 app.get("/friends-wannabes", (req, res) => {
     console.log("GET /friends-wannabes made!!");
-    console.log("req.session.userId", req.session.userId);
-    db.getFriendsAndWannabes().then((result) => {
-        console.log("result.rows: ", result.rows);
-    });
+    // console.log("req.session.userId", req.session.userId);
+    const loggedUser = req.session.userId;
+    db.getFriendsAndWannabes(loggedUser)
+        .then((result) => {
+            // console.log("result.rows: ", result.rows);
+            res.json({
+                success: true,
+                result: result.rows,
+            });
+        })
+        .catch((err) => {
+            console.log("Error in GET /friends-wannabes", err);
+        });
 });
 
 app.get("*", function (req, res) {

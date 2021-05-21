@@ -11,21 +11,22 @@ export default function FriendButton({ viewerId }) {
         axios
             .get("/friend-status/" + viewerId)
             .then(({ data }) => {
-                console.log("GET data.btnText: ", data.buttonText);
+                console.log("GET data: ", data);
                 setButtonText(data.buttonText);
             })
             .catch((err) => {
                 console.log("Error in GET axios /friend-status/:id", err);
             });
-    });
+    }, []);
 
     const handleSubmit = (e) => {
         console.log("handleSubmit in friend-button working!");
+        console.log("buttonText before POST: ", buttonText);
         e.preventDefault;
         axios
             .post("/friend-status/" + viewerId, { buttonText: buttonText })
             .then(({ data }) => {
-                console.log("POST data.btnText; ", data.buttonText);
+                console.log("POST data.btnText; ", data);
                 setButtonText(data.buttonText);
             })
             .catch((err) => {

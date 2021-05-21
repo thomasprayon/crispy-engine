@@ -66,7 +66,7 @@ module.exports.searchForUsersInformation = (searchInput) => {
     return db.query(q, params);
 };
 
-module.exports.friendshipStatus = (loggedUser, viewedUser) => {
+module.exports.friendshipStatus = (viewedUser, loggedUser) => {
     const q = `SELECT * FROM friendships WHERE (recipient_id = $1 AND sender_id = $2) OR (recipient_id = $2 AND sender_id = $1)`;
     const params = [loggedUser, viewedUser];
     return db.query(q, params);
