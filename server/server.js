@@ -370,7 +370,7 @@ app.get("/friend-status/:id", (req, res) => {
                     result.rows[0].sender_id
                 );
                 console.log("loggedUser", loggedUser);
-                if (result.rows[0].recipient_id === loggedUser) {
+                if (result.rows[0].sender_id === loggedUser) {
                     // console.log(
                     //     "result.rows[0].recipient_id: ",
                     //     result.rows[0].recipient_id
@@ -383,11 +383,11 @@ app.get("/friend-status/:id", (req, res) => {
                     // console.log("viewedUser is: ", viewedUser);
 
                     res.json({
-                        buttonText: "Cancel Request",
+                        buttonText: "Accept Request",
                     });
                 } else {
                     res.json({
-                        buttonText: "Accept Request",
+                        buttonText: "Cancel Request",
                     });
                 }
             }

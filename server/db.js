@@ -79,7 +79,7 @@ module.exports.makeFriendRequest = (loggedUser, viewedUser) => {
 };
 
 module.exports.acceptFriendRequest = (loggedUser, viewedUser) => {
-    const q = `UPDATE friendships SET accepted = true WHERE sender_id = $2 AND recipient_id = $1 RETURNING * `;
+    const q = `UPDATE friendships SET accepted = true WHERE sender_id = $1 AND recipient_id = $2 RETURNING * `;
     const params = [loggedUser, viewedUser];
     return db.query(q, params);
 };
