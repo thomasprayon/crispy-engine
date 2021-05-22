@@ -19,11 +19,14 @@ export function acceptFriendRequest(id) {
     console.log("click accepting friend request");
     // console.log("id: ", id);
     // const buttonText = "Accept Request";
-    // console.log("buttonText: ", buttonText);
     return axios
-        .post("/friend-status/" + id)
+        .post("/friend-status/" + id, { buttonText: "Accept Request" })
         .then(({ data }) => {
-            console.log("data: ", data);
+            // console.log("data: ", data);
+            return {
+                type: "ACCEPT_REQUEST",
+                id,
+            };
         })
         .catch((err) =>
             console.log("Error in accepting pending requests", err)
@@ -33,9 +36,13 @@ export function acceptFriendRequest(id) {
 export function unfriend(id) {
     console.log("click unfriend request");
     return axios
-        .post("/friend-status/" + id)
+        .post("/friend-status/" + id, { buttonText: "Unfriend" })
         .then(({ data }) => {
-            console.log("data: ", data);
+            // console.log("data: ", data);
+            return {
+                type: "UNFRIEND",
+                id,
+            };
         })
         .catch((err) => {
             console.log("Error in unfriending a already friend", err);
