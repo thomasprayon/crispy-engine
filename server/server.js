@@ -418,7 +418,7 @@ app.post("/friend-status/:id", (req, res) => {
                 res.json({
                     success: true,
                     buttonText: "Cancel Request",
-                    // result: result.rows[0].accepted,
+                    result: result.rows[0],
                 });
             })
             .catch((err) => {
@@ -433,7 +433,7 @@ app.post("/friend-status/:id", (req, res) => {
                 res.json({
                     buttonText: "Unfriend",
                     success: true,
-                    // result: result.rows[0].accepted,
+                    result: result.rows[0],
                 });
             })
             .catch((err) => {
@@ -447,7 +447,7 @@ app.post("/friend-status/:id", (req, res) => {
             res.json({
                 buttonText: "Add Friend",
                 success: true,
-                // result: result.rows[0].accepted,
+                result: result.rows[0],
             });
         });
     }

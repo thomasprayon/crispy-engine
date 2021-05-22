@@ -17,8 +17,8 @@ export default function FriendsOrNot() {
             state.users && state.users.filter((user) => user.accepted === false)
     );
 
-    console.log("friends in global state in friends.js: ", friends);
-    console.log("requests in global state in friends.js: ", requests);
+    // console.log("friends in global state in friends.js: ", friends);
+    // console.log("requests in global state in friends.js: ", requests);
 
     useEffect(() => {
         dispatch(getFriendsAndWannabes());
@@ -31,7 +31,7 @@ export default function FriendsOrNot() {
                     <h2>These people want to be your friends</h2>
                     {requests &&
                         requests.map((user, index) => {
-                            console.log("user: ", user);
+                            // console.log("user: ", user);
                             return (
                                 <div
                                     key={index}
@@ -50,7 +50,9 @@ export default function FriendsOrNot() {
                                         </h3>
                                         <button
                                             onClick={() =>
-                                                dispatch(acceptFriendRequest())
+                                                dispatch(
+                                                    acceptFriendRequest(user.id)
+                                                )
                                             }
                                         >
                                             Accept Friend Request
@@ -64,7 +66,7 @@ export default function FriendsOrNot() {
                     <h2>These people are currently your friends</h2>
                     {friends &&
                         friends.map((user, index) => {
-                            console.log("user: ", user);
+                            // console.log("user: ", user);
                             return (
                                 <div
                                     key={index}
@@ -82,7 +84,7 @@ export default function FriendsOrNot() {
                                     </h3>
                                     <button
                                         onClick={() =>
-                                            dispatch(acceptFriendRequest())
+                                            dispatch(unfriend(user.id))
                                         }
                                     >
                                         Unfriend
