@@ -18,11 +18,10 @@ export function getFriendsAndWannabes() {
 export function acceptFriendRequest(id) {
     console.log("click accepting friend request");
     // console.log("id: ", id);
-    // const buttonText = "Accept Request";
     return axios
         .post("/friend-status/" + id, { buttonText: "Accept Request" })
         .then(({ data }) => {
-            // console.log("data: ", data);
+            console.log("data: ", data);
             return {
                 type: "ACCEPT_REQUEST",
                 id,
@@ -38,7 +37,7 @@ export function unfriend(id) {
     return axios
         .post("/friend-status/" + id, { buttonText: "Unfriend" })
         .then(({ data }) => {
-            // console.log("data: ", data);
+            console.log("data: ", data);
             return {
                 type: "UNFRIEND",
                 id,
