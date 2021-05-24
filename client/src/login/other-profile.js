@@ -1,6 +1,8 @@
 import { Component } from "react";
 import axios from "../axios";
 import FriendButton from "./friend-button";
+import { Container, Col, Row } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class OtherProfile extends Component {
     constructor() {
@@ -31,26 +33,32 @@ export default class OtherProfile extends Component {
     render() {
         return (
             <>
-                <div className="profile-container">
-                    <div className="img-profile">
-                        <img
-                            src={this.state.imgUrl}
-                            alt={`${this.state.firstName} ${this.state.lastName}`}
-                            className="profile-img"
-                        />
-                    </div>
-                    <div className="info-profile">
-                        <h2>
-                            {this.state.firstName} {this.state.lastName}
-                        </h2>
-                        <p>{this.state.bio}</p>
-                        <div>
-                            <FriendButton
-                                viewerId={this.props.match.params.id}
+                <Container className="bg-white mt-5 profile-container d-flex-justify-content-center">
+                    <Row className="d-flex-align-items-center mt-4">
+                        <Col xs lg="2">
+                            <img
+                                src={this.state.imgUrl}
+                                alt={`${this.state.firstName} ${this.state.lastName}`}
+                                className="profile-img"
                             />
-                        </div>
-                    </div>
-                </div>
+                        </Col>
+                        <Col>
+                            <Row>
+                                <h2>
+                                    {this.state.firstName} {this.state.lastName}
+                                </h2>
+                            </Row>
+                            <Row>
+                                <p>{this.state.bio}</p>
+                            </Row>
+                            <Row>
+                                <FriendButton
+                                    viewerId={this.props.match.params.id}
+                                />
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container>
             </>
         );
     }

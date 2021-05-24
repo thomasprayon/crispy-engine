@@ -1,6 +1,8 @@
 import { Component } from "react";
 import axios from "../axios";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class ResetPassword extends Component {
     constructor(props) {
@@ -17,7 +19,7 @@ export default class ResetPassword extends Component {
     }
     submitEmail(e) {
         console.log("Submit working on Reset Password!");
-        console.log("Event: ", e);
+        // console.log("Event: ", e);
 
         e.preventDefault();
 
@@ -72,62 +74,111 @@ export default class ResetPassword extends Component {
         if (this.state.view === 1) {
             return (
                 <>
-                    <div className="reset-password-container">
+                    <div className="my-3">
                         {this.state.error && (
                             <p className="error">
                                 Oops! Something went wrong, try again!!
                             </p>
                         )}
-                        <h3>Please enter your email to change password</h3>
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            onChange={(e) => this.handleChange(e)}
-                        />
-                        <button
-                            onClick={(e) => this.submitEmail(e)}
-                            className="register-btn"
-                        >
-                            Submit
-                        </button>
+                        <h3 className="text-white row d-flex justify-content-center">
+                            Please enter your email to change password
+                        </h3>
+                        <div className="col mt-5">
+                            <div className="row  d-flex justify-content-center">
+                                <label
+                                    htmlFor="email"
+                                    className="col-form-label text-white d-flex justify-content-center"
+                                >
+                                    Email
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    autoComplete="off"
+                                    className="form-control"
+                                    onChange={(e) => this.handleChange(e)}
+                                />
+                            </div>
+                            <div className="row d-flex justify-content-between my-5">
+                                <div className="col d-flex justify-content-center">
+                                    <Button
+                                        type="submit"
+                                        onClick={(e) => this.submitEmail(e)}
+                                    >
+                                        Submit
+                                    </Button>
+                                </div>
+                                <div className="col d-flex justify-content-center">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                    >
+                                        <Link
+                                            to="/login"
+                                            className="text-white btn-go-back"
+                                        >
+                                            Go Back
+                                        </Link>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </>
             );
         } else if (this.state.view === 2) {
             return (
-                <div>
+                <div className="my-3">
                     {this.state.error && (
                         <p className="error">
                             Oops! Something went wrong, try again!!
                         </p>
                     )}
-                    <label htmlFor="code">Verification Code</label>
-                    <input
-                        type="text"
-                        id="code"
-                        name="code"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <label htmlFor="password">New Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <button
-                        onClick={(e) => this.submitEmail(e)}
-                        className="register-btn"
-                    >
-                        Submit
-                    </button>
+                    <div className="row g-3 align-items-center">
+                        <label
+                            htmlFor="code"
+                            className="col-form-label text-white d-flex justify-content-center"
+                        >
+                            Verification Code
+                        </label>
+                        <input
+                            type="text"
+                            id="code"
+                            name="code"
+                            className="form-control"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                    </div>
+                    <div className="row g-3 align-items-center">
+                        <label
+                            htmlFor="password"
+                            className="col-form-label text-white d-flex justify-content-center"
+                        >
+                            New Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            className="form-control"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                    </div>
+                    <div className="row d-flex justify-content-center mt-4">
+                        <Button
+                            type="submit"
+                            onClick={(e) => this.submitEmail(e)}
+                        >
+                            Submit
+                        </Button>
+                    </div>
                 </div>
             );
         } else if (this.state.view === 3) {
             return (
                 <div>
-                    <h1> you successfully reset your password</h1>
+                    <h1>You have successfully reset your password</h1>
                     <Link to="/login">Log in!</Link>
                 </div>
             );

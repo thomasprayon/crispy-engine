@@ -1,6 +1,8 @@
 import { Component } from "react";
 import axios from "../axios";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class Login extends Component {
     constructor() {
@@ -26,43 +28,69 @@ export default class Login extends Component {
             });
     }
     handleChange({ target }) {
+        console.log("handleChange happening");
         this.setState({
             [target.name]: target.value,
         });
     }
     render() {
         return (
-            <div className="registration-login-container">
+            <div className="my-3">
                 {this.state.error && (
                     <p className="error">
                         Oops! Something went wrong, try again!!
                     </p>
                 )}
-                <div className="form-registration-login">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        autoComplete="off"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        autoComplete="off"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <button
-                        onClick={() => this.submit()}
-                        className="register-btn"
-                    >
-                        Submit
-                    </button>
-                    <Link to="/">Sign Up</Link>
-                    <Link to="/password/reset">Forgot your Password?</Link>
+                <div className="row g-3 align-items-center">
+                    <div className="row-auto">
+                        <label
+                            htmlFor="email"
+                            className="col-form-label text-white d-flex justify-content-center"
+                        >
+                            Email
+                        </label>
+                        <div className="row-auto">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                autoComplete="off"
+                                className="form-control"
+                                onChange={(e) => this.handleChange(e)}
+                            />
+                        </div>
+                        <div className="row-auto">
+                            <label
+                                htmlFor="password"
+                                className="col-form-label text-white d-flex justify-content-center"
+                            >
+                                Password
+                            </label>
+                        </div>
+                        <div className="row-auto">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                autoComplete="off"
+                                className="form-control"
+                                onChange={(e) => this.handleChange(e)}
+                            />
+                        </div>
+                        <div className="row d-flex justify-content-center mt-3">
+                            <Button type="submit" onClick={() => this.submit()}>
+                                Submit
+                            </Button>
+                        </div>
+                        <div className="d-flex justify-content-center mt-3">
+                            <Link to="/">Sign up</Link>
+                        </div>
+                        <div className="d-flex justify-content-center mt-3">
+                            <Link to="/password/reset">
+                                Forgot your Password?
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

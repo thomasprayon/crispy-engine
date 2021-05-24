@@ -3,11 +3,12 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Uploader from "./uploader";
 import ProfilePic from "./profile-pic";
 import Profile from "./profile";
-import NavBar from "./nav-bar";
+import Header from "./header";
 import axios from "../axios";
 import OtherProfile from "./other-profile";
 import FindPeople from "./find-people";
 import FriendsOrNot from "./friends";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class App extends Component {
     constructor() {
@@ -55,19 +56,8 @@ export default class App extends Component {
         return (
             <>
                 <BrowserRouter>
-                    <div className="main-container">
-                        <header>
-                            <img
-                                src="/images/part1Crop.png"
-                                alt="logo"
-                                className="logo-header"
-                            />
-                        </header>
-                        <NavBar
-                            firstName={this.state.firstName}
-                            lastName={this.state.lastName}
-                        />
-                        <ProfilePic
+                    <div className="app-container bg-dark">
+                        <Header
                             firstName={this.state.firstName}
                             lastName={this.state.lastName}
                             imgUrl={

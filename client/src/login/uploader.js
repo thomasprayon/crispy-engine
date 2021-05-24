@@ -1,5 +1,7 @@
 import { Component } from "react";
 import axios from "../axios";
+import { Button, Container, Row } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class Uploader extends Component {
     constructor(props) {
@@ -37,17 +39,22 @@ export default class Uploader extends Component {
     render() {
         return (
             <>
-                <div className="uploader-container">
-                    <span
-                        onClick={this.props.toggleUploader}
-                        className="close-span"
-                    >
-                        X
-                    </span>
-                    <div className="uploader-content">
+                <Container className="uploader-container bg-danger">
+                    <Container className="d-flex justify-content-end pe-5">
+                        <span
+                            className="close-uploader"
+                            onClick={this.props.toggleUploader}
+                        >
+                            X
+                        </span>
+                    </Container>
+
+                    <Row className="d-flex justify-content-center mt-1">
                         <h2>Do you want to change your image?</h2>
-                        <div class="upload-btn-wrapper">
-                            <button className="btn">Upload</button>
+                    </Row>
+                    <Row className="d-flex justify-content-center mt-2">
+                        <div className="upload-btn-wrapper">
+                            <Button>Upload</Button>
                             <input
                                 type="file"
                                 name="file"
@@ -55,12 +62,11 @@ export default class Uploader extends Component {
                                 onChange={(e) => this.handleChange(e)}
                             />
                         </div>
-
-                        <button onClick={(e) => this.submit(e)} className="btn">
-                            Submit
-                        </button>
-                    </div>
-                </div>
+                    </Row>
+                    <Row className="d-flex justify-content-center mt-3">
+                        <Button onClick={(e) => this.submit(e)}>Submit</Button>
+                    </Row>
+                </Container>
             </>
         );
     }

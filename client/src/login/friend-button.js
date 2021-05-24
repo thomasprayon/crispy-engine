@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "../axios";
+import { Button } from "react-bootstrap";
 
 export default function FriendButton({ viewerId }) {
     const [buttonText, setButtonText] = useState("");
@@ -36,7 +37,7 @@ export default function FriendButton({ viewerId }) {
 
     return (
         <>
-            <button onClick={(e) => handleSubmit(e)}>{buttonText}</button>
+            <Button onClick={(e) => handleSubmit(e)}>{buttonText}</Button>
         </>
     );
 }

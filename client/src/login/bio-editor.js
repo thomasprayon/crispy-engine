@@ -1,5 +1,7 @@
 import { Component } from "react";
 import axios from "../axios";
+import { Button, Container, Col, Row } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class BioEditor extends Component {
     constructor() {
@@ -63,27 +65,36 @@ export default class BioEditor extends Component {
                 {this.props.bio && this.state.showButtons && (
                     <>
                         <p>{this.props.bio}</p>
-                        <button
+                        <a
                             className="edit-btn"
                             onClick={() => this.toggleBio()}
                         >
                             Edit bio
-                        </button>
+                        </a>
                     </>
                 )}
                 {this.state.showTextArea && (
                     <>
-                        <div>
+                        <div className="bio-text-area">
                             <textarea
+                                className="form-control"
+                                rows="2"
+                                placeholder="Write something about yourself..."
                                 defaultValue={this.props.bio}
                                 onChange={(e) => this.handleChange(e)}
                             ></textarea>
-                            <button onClick={(e) => this.submitBio(e)}>
-                                Submit
-                            </button>
-                            <button onClick={(e) => this.toggleBio(e)}>
-                                Cancel
-                            </button>
+                            <Row className="d-flex align-items-center mt-3">
+                                <Col className="d-flex justify-content-end">
+                                    <Button onClick={(e) => this.submitBio(e)}>
+                                        Submit
+                                    </Button>
+                                </Col>
+                                <Col>
+                                    <Button onClick={(e) => this.toggleBio(e)}>
+                                        Cancel
+                                    </Button>
+                                </Col>
+                            </Row>
                         </div>
                     </>
                 )}

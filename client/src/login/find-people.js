@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "../axios";
 import { Link } from "react-router-dom";
+import { Col, Container, Row } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function FindPeople() {
     const [users, setUsers] = useState([]);
@@ -45,26 +47,51 @@ export default function FindPeople() {
 
     return (
         <>
-            <div className="findPeople-container">
-                <h2>Find People:</h2>
-                <input onChange={handleChange} placeholder="Find people..." />
-                {!searchInput && <p>Last people who join!</p>}
+            <Container className="mt-3">
+                <Col>
+                    <Row>
+                        <h2 className="text-white">Find People</h2>
+                    </Row>
+                    <Row>
+                        <input
+                            onChange={handleChange}
+                            placeholder="Connect with your friends..."
+                            className="form-control col-sm-4"
+                        />
+                    </Row>
+                </Col>
+                {!searchInput && (
+                    <h5 className="text-white">Last people who join!</h5>
+                )}
                 {users.map((user, index) => {
                     // console.log("user", user);
                     return (
-                        <Link
-                            to={`/user/${user.id}`}
+                        <Row
                             key={index}
-                            className="result-findPeople"
+                            className="bg-white mt-4  other-profile-container"
                         >
-                            <img src={user.img_url} className="profile-img" />
-                            <p>
-                                {user.first_name} {user.last_name}
-                            </p>
-                        </Link>
+                            <Link
+                                to={`/user/${user.id}`}
+                                key={index}
+                                id="link-find"
+                            >
+                                <Col className="d-flex-align-items-center">
+                                    <Row>
+                                        <img
+                                            src={user.img_url}
+                                            className="profile-img m-2"
+                                        />
+
+                                        <h3 className="m-4">
+                                            {user.first_name} {user.last_name}
+                                        </h3>
+                                    </Row>
+                                </Col>
+                            </Link>
+                        </Row>
                     );
                 })}
-            </div>
+            </Container>
         </>
     );
 }

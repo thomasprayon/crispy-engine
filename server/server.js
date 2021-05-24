@@ -109,12 +109,12 @@ app.post("/login", (req, res) => {
     // console.log("req.body", req.body);
     const { email, password } = req.body;
     db.getUser(email).then((result) => {
-        // console.log("result.rows", result.rows);
+        console.log("result.rows", result.rows);
         console.log("result.rows[0]", result.rows[0]);
         const { password_hash } = result.rows[0];
         const { id } = result.rows[0];
-        // console.log("password_hash", password_hash);
-        // console.log("id", id);
+        console.log("password_hash", password_hash);
+        console.log("id", id);
         compare(password, password_hash)
             .then((match) => {
                 console.log("match", match);
