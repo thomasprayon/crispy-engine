@@ -1,6 +1,6 @@
 import { Component } from "react";
 import axios from "../axios";
-import { Button, Container, Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class BioEditor extends Component {
@@ -64,13 +64,19 @@ export default class BioEditor extends Component {
                 )}
                 {this.props.bio && this.state.showButtons && (
                     <>
-                        <p>{this.props.bio}</p>
-                        <a
-                            className="edit-btn"
-                            onClick={() => this.toggleBio()}
-                        >
-                            Edit bio
-                        </a>
+                        <Col>
+                            <Row className="d-flex justify-content-center">
+                                <p>{this.props.bio}</p>
+                            </Row>
+                            <Row className="d-flex justify-content-center">
+                                <a
+                                    className="edit-btn"
+                                    onClick={() => this.toggleBio()}
+                                >
+                                    Edit bio
+                                </a>
+                            </Row>
+                        </Col>
                     </>
                 )}
                 {this.state.showTextArea && (

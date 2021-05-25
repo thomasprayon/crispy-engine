@@ -18,13 +18,24 @@ const { s3Url } = require("./config.json");
 
 const multer = require("multer");
 const uidSafe = require("uid-safe");
+const { listenerCount } = require("events");
 
-app.use(
-    cookieSession({
-        secret: COOKIE_SECRET,
-        maxAge: 1000 * 60 * 60 * 24 * 7 * 6,
-    })
-);
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
+
+const cookieSessionMiddleware = cookieSession({
+    secret: COOKIE_SECRET,
+    maxAge: 1000 * 60 * 60 * 24 * 90,
+});
+
+app.use(cookieSessionMiddleware);
+
+io.use(function (socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use(csurf());
 
@@ -476,6 +487,37 @@ app.get("*", function (req, res) {
     }
 });
 
-app.listen(process.env.PORT || 3001, function () {
+server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
+});
+
+io.on("connection", function (socket) {
+    console.log(`socket witthe id ${socket.id} is now connected`);
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+
+    const userId = socket.request.session.userId;
+    console.log("userId in sockets: ", userId);
+
+    // so if they make it here, it means they are logged into the social network
+    // we want to fetch the last 10 messages
+
+    //we need to create a chat table first
+    // db.getLast10Messages (this probably needs to be a JOIN)
+    // then
+    //we want to emit them out to everyone
+
+    socket.on("chat message", (msg) => {
+        console.log("msg: ", msg);
+        io.sockets.emit("muffin: ", msg);
+    });
+
+    //we need to add a listenerCount, for anytime a new chat event happens
+    //we will figure out which user wrote the chat messagge (db query)
+    //then
+    //we will create a chat object
+    //emit that chat object to everyopne who is connected
+    //then
+    //we need to add this chat message to the chats table
 });

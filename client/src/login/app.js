@@ -8,6 +8,7 @@ import axios from "../axios";
 import OtherProfile from "./other-profile";
 import FindPeople from "./find-people";
 import FriendsOrNot from "./friends";
+import { Chat } from "./chat";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class App extends Component {
@@ -87,7 +88,7 @@ export default class App extends Component {
                             path="/friends-or-not"
                             component={FriendsOrNot}
                         />
-
+                        <Route path="/chat" component={Chat} />
                         {this.state.uploaderIsVisible && (
                             <Uploader
                                 updateProfilePic={this.updateProfilePic}

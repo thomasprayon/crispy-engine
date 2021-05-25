@@ -36,8 +36,11 @@ export default function FriendsOrNot() {
                         requests.map((user, index) => {
                             // console.log("user: ", user);
                             return (
-                                <div className="d-inline-flex bg-secondary mx-2 rounded">
-                                    <Col>
+                                <div
+                                    className="d-inline-flex bg-secondary mx-2 rounded"
+                                    key={index}
+                                >
+                                    <Col key={index}>
                                         <Link
                                             to={`/user/${user.id}`}
                                             key={index}
@@ -77,8 +80,11 @@ export default function FriendsOrNot() {
                         friends.map((user, index) => {
                             // console.log("user: ", user);
                             return (
-                                <div className="d-inline-flex bg-secondary mx-2 rounded">
-                                    <Col>
+                                <div
+                                    className="d-inline-flex bg-secondary mx-2 rounded"
+                                    key={index}
+                                >
+                                    <Col key={index}>
                                         <Link
                                             to={`/user/${user.id}`}
                                             key={index}

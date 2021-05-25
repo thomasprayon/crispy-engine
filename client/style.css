@@ -304,11 +304,12 @@ main {
     color: black;
     font-weight: 700;
 }
-.profile-container {
+/* .profile-container {
     border-radius: 35px;
     border: 2px solid brown;
     height: 13rem;
-}
+    width: 10rem;
+} */
 .profile-img {
     width: 100px;
     height: 100px;
@@ -355,4 +356,10 @@ a {
 }
 .header-logo {
     font-weight: 700;
+}
+.container {
+    border-radius: 35px;
+    border: 2px solid brown;
+    height: 20rem;
+    width: 10rem;
 }
