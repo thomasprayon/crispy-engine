@@ -1,3 +1,5 @@
+import { act } from "react-dom/test-utils";
+
 export default function (state = {}, action) {
     if (action.type === "FRIENDS_AND_WANNABES") {
         state = {
@@ -28,5 +30,18 @@ export default function (state = {}, action) {
             users: state.users.filter((user) => user.id !== action.id),
         };
     }
+    if (action.type === "ADD_MESSAGE") {
+        state = {
+            ...state,
+            chatMessages: [...state.chatMessages, action.msg],
+        };
+    }
+    if (action.type === "LAST_MESSAGES") {
+        state = {
+            ...state,
+            chatMessages: action.payload,
+        };
+    }
+
     return state;
 }

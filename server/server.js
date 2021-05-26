@@ -18,7 +18,6 @@ const { s3Url } = require("./config.json");
 
 const multer = require("multer");
 const uidSafe = require("uid-safe");
-const { listenerCount } = require("events");
 
 const server = require("http").Server(app);
 const io = require("socket.io")(server, {
@@ -492,13 +491,18 @@ server.listen(process.env.PORT || 3001, function () {
 });
 
 io.on("connection", function (socket) {
-    console.log(`socket witthe id ${socket.id} is now connected`);
+    // console.log(`socket with the id ${socket.id} is now connected`);
+
     if (!socket.request.session.userId) {
         return socket.disconnect(true);
     }
 
     const userId = socket.request.session.userId;
-    console.log("userId in sockets: ", userId);
+    console.log(`User ${userId} is connected with the socket.id: ${socket.id}`);
+
+    // socket.on("disconnect", () => {
+    //     console.log(`User ${userId} just disconneted with socket ${socket.id}`);
+    // });
 
     // so if they make it here, it means they are logged into the social network
     // we want to fetch the last 10 messages
@@ -508,9 +512,32 @@ io.on("connection", function (socket) {
     // then
     //we want to emit them out to everyone
 
-    socket.on("chat message", (msg) => {
+    // db.getLastTenMessages().then((result) => {
+    //     console.log("result.rows: ", result.rows);
+    // });
+
+    // socket.on("chatMessages", (msg) => {
+    //     console.log("msg: ", msg);
+    // });
+
+    db.getLastTenMessages()
+        .then((result) => {
+            console.log("getLastTenMessages(result.rows): ", result.rows);
+            // io.sockets.emit("chatMessages", results.rows.reverse());
+        })
+        .catch((err) => {
+            console.log("Error in getLastTenMessages", err);
+        });
+
+    socket.on("chatMessage", (msg) => {
         console.log("msg: ", msg);
-        io.sockets.emit("muffin: ", msg);
+        db.insertMessages(msg, userId)
+            .then((result) => {
+                console.log("insertMessages (result.rows): ", result);
+            })
+            .catch((err) => {
+                console.log("Error in insertMessages", err);
+            });
     });
 
     //we need to add a listenerCount, for anytime a new chat event happens

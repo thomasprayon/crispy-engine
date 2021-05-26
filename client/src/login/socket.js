@@ -8,10 +8,8 @@ export const init = (store) => {
     if (!socket) {
         socket = io.connect();
 
-        // socket.on("chatMessages", (msgs) => store.dispatch(chatMessages(msgs)));
+        socket.on("chatMessages", (msgs) => store.dispatch(chatMessages(msgs)));
 
-        // socket.on("chatMessage", (msg) => store.dispatch(chatMessage(msg)));
-
-        socket.on("muffin", (msg) => console.log("msg in socket.js: ", msg));
+        socket.on("chatMessage", (msg) => store.dispatch(chatMessage(msg)));
     }
 };

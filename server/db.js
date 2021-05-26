@@ -100,3 +100,14 @@ module.exports.getFriendsAndWannabes = (loggedUser) => {
     const params = [loggedUser];
     return db.query(q, params);
 };
+
+module.exports.insertMessages = (message, userId) => {
+    const q = `INSERT INTO messages (sender_id, message) VALUES ($1, $2) RETURNING *`;
+    const params = [message, userId];
+    return db.query(q, params);
+};
+
+module.exports.getLastTenMessages = () => {
+    const q = `SELECT first_name, last_name, img_url, message, messages.created_at FROM users JOIN messages ON messages.sender_id = users.id ORDER BY messages.created_at DESC LIMIT 10`;
+    return db.query(q);
+};

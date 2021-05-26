@@ -8,8 +8,9 @@ import axios from "../axios";
 import OtherProfile from "./other-profile";
 import FindPeople from "./find-people";
 import FriendsOrNot from "./friends";
-import { Chat } from "./chat";
+import Chat from "./chat";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ReactCSSTransitionGroup from "react-transition-group";
 
 export default class App extends Component {
     constructor() {

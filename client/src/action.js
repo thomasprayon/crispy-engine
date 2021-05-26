@@ -47,3 +47,19 @@ export function unfriend(id) {
             console.log("Error in unfriending a already friend", err);
         });
 }
+
+export function chatMessages(msgs) {
+    console.log("chatMessages msgs: ", msgs);
+    return {
+        type: "LAST_MESSAGES",
+        payload: msgs,
+    };
+}
+
+export function chatMessage(msg) {
+    console.log("chatMessage msg: ", msg);
+    return {
+        type: "ADD_MESSAGE",
+        payload: msg,
+    };
+}

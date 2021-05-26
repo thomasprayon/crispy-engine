@@ -66,29 +66,32 @@ export default function FindPeople() {
                 {users.map((user, index) => {
                     // console.log("user", user);
                     return (
-                        <Row
-                            key={index}
-                            className="bg-white mt-4  other-profile-container"
-                        >
-                            <Link
-                                to={`/user/${user.id}`}
+                        <>
+                            <Row
                                 key={index}
-                                id="link-find"
+                                className="bg-white mt-4  other-profile-container"
                             >
-                                <Col className="d-flex-align-items-center">
-                                    <Row>
-                                        <img
-                                            src={user.img_url}
-                                            className="profile-img m-2"
-                                        />
+                                <Link
+                                    to={`/user/${user.id}`}
+                                    key={index}
+                                    id="link-find"
+                                >
+                                    <Col className="d-flex-align-items-center">
+                                        <Row>
+                                            <img
+                                                src={user.img_url}
+                                                className="profile-img m-2"
+                                            />
 
-                                        <h3 className="m-4">
-                                            {user.first_name} {user.last_name}
-                                        </h3>
-                                    </Row>
-                                </Col>
-                            </Link>
-                        </Row>
+                                            <h3 className="m-4">
+                                                {user.first_name}{" "}
+                                                {user.last_name}
+                                            </h3>
+                                        </Row>
+                                    </Col>
+                                </Link>
+                            </Row>
+                        </>
                     );
                 })}
             </Container>

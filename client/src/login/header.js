@@ -33,6 +33,7 @@ export default function Header(props) {
                         <NavDropdown.Item href="/friends-or-not">
                             People
                         </NavDropdown.Item>
+                        <NavDropdown.Item href="/chat">Chat</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="/logout">
                             Logout
