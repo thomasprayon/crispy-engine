@@ -102,7 +102,7 @@ module.exports.getFriendsAndWannabes = (loggedUser) => {
 };
 
 module.exports.insertMessages = (message, userId) => {
-    const q = `INSERT INTO messages (sender_id, message) VALUES ($1, $2) RETURNING *`;
+    const q = `INSERT INTO messages (message, sender_id) VALUES ($1, $2) RETURNING *`;
     const params = [message, userId];
     return db.query(q, params);
 };

@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 import { socket } from "./socket";
 import { useSelector } from "react-redux";
-
+import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Chat() {
     const chatMessages = useSelector((state) => state && state.chatMessages);
-    // console.log("chatMessages: ", chatMessages);
+    console.log("chatMessages: ", chatMessages);
 
     const elemRef = useRef();
 
@@ -28,8 +28,8 @@ export default function Chat() {
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
-            console.log("e: ", e.target.value);
-            socket.imit("chatMessage", e.target.value);
+            // console.log("e: ", e.target.value);
+            socket.emit("chatMessage", e.target.value);
             e.target.value = "";
         }
     };
@@ -39,18 +39,41 @@ export default function Chat() {
     return (
         <>
             {/* CSS: height:300px overflow-y: auto */}
-            <div className="bg-white mt-5">
+            <Container className="bg-white mt-5">
                 <h1>Chat room</h1>
-                <div className="chat-message-contaner" ref={elemRef}>
-                    <ul>
-                        <li>This is will be a chat message.</li>
-                    </ul>
+                <div className="chat-message-container" ref={elemRef}>
+                    {chatMessages &&
+                        chatMessages.map((message, index) => {
+                            // console.log("message:", message);
+                            console.log("index: ", index);
+                            return (
+                                <>
+                                    <Row className="bg-secondary m-2 rounded">
+                                        <div>
+                                            <img
+                                                src={message.img_url}
+                                                className="img-chat"
+                                            />
+                                        </div>
+                                        <div>
+                                            <p>
+                                                {message.first_name}{" "}
+                                                {message.last_name}
+                                            </p>
+                                            <p key={index}>{message.message}</p>
+                                            <p>{message.created_at}</p>
+                                        </div>
+                                    </Row>
+                                </>
+                            );
+                        })}
                 </div>
                 <textarea
                     onKeyDown={handleKeyDown}
                     placeholder="Place your chat here..."
+                    className="form-control"
                 ></textarea>
-            </div>
+            </Container>
         </>
     );
 }

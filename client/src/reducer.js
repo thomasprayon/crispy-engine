@@ -1,5 +1,3 @@
-import { act } from "react-dom/test-utils";
-
 export default function (state = {}, action) {
     if (action.type === "FRIENDS_AND_WANNABES") {
         state = {
@@ -33,7 +31,7 @@ export default function (state = {}, action) {
     if (action.type === "ADD_MESSAGE") {
         state = {
             ...state,
-            chatMessages: [...state.chatMessages, action.msg],
+            chatMessages: [...state.chatMessages, action.payload],
         };
     }
     if (action.type === "LAST_MESSAGES") {
@@ -42,6 +40,9 @@ export default function (state = {}, action) {
             chatMessages: action.payload,
         };
     }
+
+    console.log("action: ", action);
+    console.log("state: ", state);
 
     return state;
 }

@@ -49,7 +49,7 @@ export function unfriend(id) {
 }
 
 export function chatMessages(msgs) {
-    console.log("chatMessages msgs: ", msgs);
+    // console.log("chatMessages msgs: ", msgs);
     return {
         type: "LAST_MESSAGES",
         payload: msgs,

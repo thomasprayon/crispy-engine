@@ -503,48 +503,28 @@ io.on("connection", function (socket) {
     // socket.on("disconnect", () => {
     //     console.log(`User ${userId} just disconneted with socket ${socket.id}`);
     // });
-
-    // so if they make it here, it means they are logged into the social network
-    // we want to fetch the last 10 messages
-
-    //we need to create a chat table first
-    // db.getLast10Messages (this probably needs to be a JOIN)
-    // then
-    //we want to emit them out to everyone
-
-    // db.getLastTenMessages().then((result) => {
-    //     console.log("result.rows: ", result.rows);
-    // });
-
-    // socket.on("chatMessages", (msg) => {
-    //     console.log("msg: ", msg);
-    // });
-
-    db.getLastTenMessages()
-        .then((result) => {
-            console.log("getLastTenMessages(result.rows): ", result.rows);
-            // io.sockets.emit("chatMessages", results.rows.reverse());
-        })
-        .catch((err) => {
-            console.log("Error in getLastTenMessages", err);
-        });
+    function lastMesseges() {
+        db.getLastTenMessages()
+            .then((result) => {
+                console.log("getLastTenMessages(result.rows): ", result.rows);
+                socket.emit("chatMessages", result.rows.reverse());
+            })
+            .catch((err) => {
+                console.log("Error in getLastTenMessages", err);
+            });
+    }
+    lastMesseges();
 
     socket.on("chatMessage", (msg) => {
         console.log("msg: ", msg);
         db.insertMessages(msg, userId)
             .then((result) => {
-                console.log("insertMessages (result.rows): ", result);
+                // console.log("insertMessages (result.rows): ", result.rows[0]);
+                // socket.emit("chatMessages", result.rows[0]);
+                lastMesseges();
             })
             .catch((err) => {
                 console.log("Error in insertMessages", err);
             });
     });
-
-    //we need to add a listenerCount, for anytime a new chat event happens
-    //we will figure out which user wrote the chat messagge (db query)
-    //then
-    //we will create a chat object
-    //emit that chat object to everyopne who is connected
-    //then
-    //we need to add this chat message to the chats table
 });
