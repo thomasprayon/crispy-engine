@@ -12,15 +12,7 @@ export default function Chat() {
 
     useEffect(() => {
         console.log("useEffect mounted! in chat.js!");
-        // console.log("elemRef.current.scrollTop: ", elemRef.current.scrollTop);
-        // console.log(
-        //     "elemRef.current clientHeight: ",
-        //     elemRef.current.clientHeight
-        // );
-        // console.log(
-        //     "elemRef.element.scrollHeight: ",
-        //     elemRef.current.scrollHeight
-        // );
+
         elemRef.current.scrollTop =
             elemRef.current.scrollHeight - elemRef.current.clientHeight;
     }, [chatMessages]);
@@ -34,45 +26,64 @@ export default function Chat() {
         }
     };
 
-    // console.log("ElemRef: ", elemRef);
-
     return (
         <>
-            {/* CSS: height:300px overflow-y: auto */}
-            <Container className="bg-white mt-5">
+            <Container className="background mt-3 rounded">
                 <h1>Chat room</h1>
-                <div className="chat-message-container" ref={elemRef}>
+                <Row className="bg-info chat-message-container" ref={elemRef}>
                     {chatMessages &&
                         chatMessages.map((message, index) => {
                             // console.log("message:", message);
-                            console.log("index: ", index);
+                            // console.log("index: ", index);
                             return (
                                 <>
-                                    <Row className="bg-secondary m-2 rounded">
+                                    <Container
+                                        className="bg-primary m-2 rounded"
+                                        key={index}
+                                    >
                                         <div>
-                                            <img
-                                                src={message.img_url}
-                                                className="img-chat"
-                                            />
+                                            <div>
+                                                <p className="text-capitalize font-weight-bold">
+                                                    {message.first_name}{" "}
+                                                    {message.last_name}
+                                                </p>
+                                                <p>
+                                                    {new Date(
+                                                        message.created_at
+                                                    )
+                                                        .toUTCString()
+                                                        .replace("GMT", "")}
+                                                </p>
+                                            </div>
+                                            <Col>
+                                                <Row>
+                                                    <img
+                                                        src={message.img_url}
+                                                        className="rounded-circle object-fit:cover border border-dark align-self-end mb-2"
+                                                        width="50"
+                                                        height="50"
+                                                    />
+
+                                                    <div className="chat-bubble">
+                                                        <p>{message.message}</p>
+                                                    </div>
+                                                </Row>
+                                            </Col>
                                         </div>
-                                        <div>
-                                            <p>
-                                                {message.first_name}{" "}
-                                                {message.last_name}
-                                            </p>
-                                            <p key={index}>{message.message}</p>
-                                            <p>{message.created_at}</p>
-                                        </div>
-                                    </Row>
+                                    </Container>
                                 </>
                             );
                         })}
-                </div>
-                <textarea
-                    onKeyDown={handleKeyDown}
-                    placeholder="Place your chat here..."
-                    className="form-control"
-                ></textarea>
+                </Row>
+            </Container>
+            <Container className="background mt-3 rounded">
+                <Row className="p-3">
+                    <textarea
+                        onKeyDown={handleKeyDown}
+                        placeholder="Place your words here..."
+                        className="form-control"
+                    ></textarea>
+                </Row>
             </Container>
         </>
     );

@@ -61,7 +61,7 @@ module.exports.getNewestUsers = () => {
 };
 
 module.exports.searchForUsersInformation = (searchInput) => {
-    const q = `SELECT id, first_name, last_name, img_url FROM users WHERE first_name ILIKE $1 LIMIT 3`;
+    const q = `SELECT id, first_name, last_name, img_url FROM users WHERE first_name ILIKE $1 LIMIT 4`;
     const params = [`${searchInput}%`];
     return db.query(q, params);
 };
@@ -94,9 +94,10 @@ module.exports.getFriendsAndWannabes = (loggedUser) => {
     const q = `SELECT users.id, first_name, last_name, img_url, accepted
                 FROM friendships
                 JOIN users
-                ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
+                ON (accepted = false AND sender_id = $1 AND recipient_id = users.id)
                 OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
-                OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)`;
+                OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)
+                `;
     const params = [loggedUser];
     return db.query(q, params);
 };
@@ -110,4 +111,22 @@ module.exports.insertMessages = (message, userId) => {
 module.exports.getLastTenMessages = () => {
     const q = `SELECT first_name, last_name, img_url, message, messages.created_at FROM users JOIN messages ON messages.sender_id = users.id ORDER BY messages.created_at DESC LIMIT 10`;
     return db.query(q);
+};
+
+module.exports.deleteUserFromUsers = (userId) => {
+    const q = `DELETE FROM users WHERE id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.deleteUserFromFriendships = (userId) => {
+    const q = `DELETE FROM friendships WHERE recipient_id = $1 OR sender_id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.deleteUserFromMessages = (userId) => {
+    const q = `DELETE FROM messages WHERE sender_id = $1`;
+    const params = [userId];
+    return db.query(q, params);
 };

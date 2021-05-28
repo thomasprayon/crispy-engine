@@ -29,87 +29,94 @@ export default function FriendsOrNot() {
 
     return (
         <>
-            <Container className="mt-3 ">
-                <Container className="bg-white friends-container">
+            <Container className="my-3">
+                <Container className="background friends-container">
                     <h2>These people want to be your friends</h2>
                     {requests &&
                         requests.map((user, index) => {
                             // console.log("user: ", user);
                             return (
                                 <div
-                                    className="d-inline-flex bg-secondary mx-2 rounded"
+                                    className="d-inline-flex bg-info m-2 friends-content rounded"
                                     key={index}
                                 >
-                                    <Col key={index}>
-                                        <Link
-                                            to={`/user/${user.id}`}
-                                            key={index}
-                                        >
+                                    <Link
+                                        to={`/user/${user.id}`}
+                                        key={index}
+                                        id="link-find"
+                                    >
+                                        <div className="d-flex justify-content-center">
                                             <img
                                                 key={user.img_url}
                                                 src={user.img_url}
-                                                className="profile-img mx-2"
+                                                className="profile-img align-self-center"
                                             />
-
-                                            <h4>
-                                                {user.first_name}
+                                        </div>
+                                        <div className="d-flex justify-content-center">
+                                            <h4 className="align-self-center">
+                                                {user.first_name}{" "}
                                                 {user.last_name}
                                             </h4>
-                                        </Link>
-                                        <Row>
-                                            <Button
-                                                onClick={() =>
-                                                    dispatch(
-                                                        acceptFriendRequest(
-                                                            user.id
-                                                        )
-                                                    )
-                                                }
-                                            >
-                                                Accept Friend Request
-                                            </Button>
-                                        </Row>
-                                    </Col>
+                                        </div>
+                                    </Link>
+                                    <div className="d-flex justify-content-center">
+                                        <Button
+                                            onClick={() =>
+                                                dispatch(
+                                                    acceptFriendRequest(user.id)
+                                                )
+                                            }
+                                        >
+                                            Accept Friend Request
+                                        </Button>
+                                    </div>
                                 </div>
                             );
                         })}
                 </Container>
-                <Container className="bg-white mt-2 friends-container">
+                <Container className="background friends-container my-3">
                     <h2>These people are currently your friends</h2>
                     {friends &&
                         friends.map((user, index) => {
                             // console.log("user: ", user);
                             return (
                                 <div
-                                    className="d-inline-flex bg-secondary mx-2 rounded"
+                                    className="d-inline-flex bg-info m-2 friends-content rounded"
                                     key={index}
                                 >
-                                    <Col key={index}>
-                                        <Link
-                                            to={`/user/${user.id}`}
-                                            key={index}
-                                        >
+                                    {/* <Row
+                                        key={index}
+                                        className="d-flex justify-content-center m-1"
+                                    > */}
+
+                                    <Link
+                                        to={`/user/${user.id}`}
+                                        key={index}
+                                        id="link-find"
+                                    >
+                                        <div className="d-flex justify-content-center">
                                             <img
                                                 key={user.img_url}
                                                 src={user.img_url}
                                                 className="profile-img"
                                             />
-
-                                            <h3>
-                                                {user.first_name}
+                                        </div>
+                                        <div className="d-flex justify-content-center">
+                                            <h3 className="">
+                                                {user.first_name}{" "}
                                                 {user.last_name}
                                             </h3>
-                                        </Link>
-                                        <Row>
-                                            <Button
-                                                onClick={() =>
-                                                    dispatch(unfriend(user.id))
-                                                }
-                                            >
-                                                Unfriend
-                                            </Button>
-                                        </Row>
-                                    </Col>
+                                        </div>
+                                    </Link>
+                                    <div className="d-flex justify-content-center">
+                                        <Button
+                                            onClick={() =>
+                                                dispatch(unfriend(user.id))
+                                            }
+                                        >
+                                            Unfriend
+                                        </Button>
+                                    </div>
                                 </div>
                             );
                         })}

@@ -33,32 +33,36 @@ export default class OtherProfile extends Component {
     render() {
         return (
             <>
-                <Container className="bg-white mt-5 profile-container d-flex-justify-content-center">
-                    <Row className="d-flex-align-items-center mt-4">
-                        <Col xs lg="2">
+                <div className="profile-container background mt-5">
+                    <Row>
+                        <Col className="d-flex justify-content-center mt-3">
                             <img
                                 src={this.state.imgUrl}
                                 alt={`${this.state.firstName} ${this.state.lastName}`}
                                 className="profile-img"
                             />
                         </Col>
+                    </Row>
+                    <Row>
+                        <Col className="d-flex justify-content-center">
+                            <h2>
+                                {this.state.firstName} {this.state.lastName}
+                            </h2>
+                        </Col>
+                    </Row>
+                    <Row>
                         <Col>
-                            <Row>
-                                <h2>
-                                    {this.state.firstName} {this.state.lastName}
-                                </h2>
-                            </Row>
-                            <Row>
-                                <p>{this.state.bio}</p>
-                            </Row>
-                            <Row>
+                            <div className="d-flex justify-content-center m-2">
+                                <p className="text-dark">{this.state.bio}</p>
+                            </div>
+                            <Row className="d-flex justify-content-center">
                                 <FriendButton
                                     viewerId={this.props.match.params.id}
                                 />
                             </Row>
                         </Col>
                     </Row>
-                </Container>
+                </div>
             </>
         );
     }

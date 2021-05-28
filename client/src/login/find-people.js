@@ -27,10 +27,10 @@ export default function FindPeople() {
         let ignore = false;
         axios
             .get("/find-users/" + searchInput)
-            .then((data) => {
-                // console.log("response /find-user/:id ", data.data);
+            .then(({ data }) => {
+                console.log("response /find-user/:id ", data);
                 if (!ignore) {
-                    setUsers(data.data);
+                    setUsers(data);
                 }
             })
             .catch((err) => {
@@ -61,29 +61,33 @@ export default function FindPeople() {
                     </Row>
                 </Col>
                 {!searchInput && (
-                    <h5 className="text-white">Last people who join!</h5>
+                    <h5 className="text-white mt-2">Last people who join!</h5>
                 )}
+
                 {users.map((user, index) => {
                     // console.log("user", user);
                     return (
                         <>
                             <Row
                                 key={index}
-                                className="bg-white mt-4  other-profile-container"
+                                className="bg-white other-profile-container background mt-3"
                             >
                                 <Link
                                     to={`/user/${user.id}`}
                                     key={index}
                                     id="link-find"
                                 >
-                                    <Col className="d-flex-align-items-center">
+                                    <Col>
                                         <Row>
                                             <img
                                                 src={user.img_url}
                                                 className="profile-img m-2"
                                             />
 
-                                            <h3 className="m-4">
+                                            <h3
+                                                className="m-4 text-purple d-flex-align-items-center"
+                                                id="b"
+                                            >
                                                 {user.first_name}{" "}
                                                 {user.last_name}
                                             </h3>

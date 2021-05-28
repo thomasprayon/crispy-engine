@@ -35,9 +35,9 @@ export default class Login extends Component {
     }
     render() {
         return (
-            <div className="my-3">
+            <div className="my-3 log-anim">
                 {this.state.error && (
-                    <p className="error">
+                    <p className="d-flex justify-content-center text-warning">
                         Oops! Something went wrong, try again!!
                     </p>
                 )}

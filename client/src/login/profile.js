@@ -1,12 +1,12 @@
 // import ProfilePic from "./profile-pic";
-import { Container, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BioEditor from "./bio-editor";
 
 export default function Profile(props) {
     return (
         <>
-            <Container className="container profile-container bg-white mt-5">
+            <div className="profile-container background  mt-5">
                 <Row>
                     <Col className="d-flex justify-content-center mt-3">
                         <img
@@ -23,10 +23,10 @@ export default function Profile(props) {
                         </h2>
                     </Col>
                 </Row>
-                <Row className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center m-2">
                     <BioEditor bio={props.bio} setBio={props.setBio} />
-                </Row>
-            </Container>
+                </div>
+            </div>
         </>
     );
 }

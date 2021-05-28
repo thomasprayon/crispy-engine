@@ -74,9 +74,9 @@ export default class ResetPassword extends Component {
         if (this.state.view === 1) {
             return (
                 <>
-                    <div className="my-3">
+                    <div className="my-3 log-anim">
                         {this.state.error && (
-                            <p className="error">
+                            <p className="text-warning d-flex justify-content-center">
                                 Oops! Something went wrong, try again!!
                             </p>
                         )}
@@ -129,9 +129,9 @@ export default class ResetPassword extends Component {
             );
         } else if (this.state.view === 2) {
             return (
-                <div className="my-3">
+                <div className="my-3 log-anim">
                     {this.state.error && (
-                        <p className="error">
+                        <p className="text-warning d-flex justify-content-center">
                             Oops! Something went wrong, try again!!
                         </p>
                     )}
@@ -178,8 +178,12 @@ export default class ResetPassword extends Component {
         } else if (this.state.view === 3) {
             return (
                 <div>
-                    <h1>You have successfully reset your password</h1>
-                    <Link to="/login">Log in!</Link>
+                    <h1 className="text-white mt-2">
+                        You have successfully reset your password
+                    </h1>
+                    <Button className="mt-2 d-flex justify-content-center">
+                        <Link to="/login">Log in!</Link>
+                    </Button>
                 </div>
             );
         }

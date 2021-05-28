@@ -11,12 +11,13 @@ export default function Welcome() {
         <>
             <div className="welcome-container bg-dark">
                 <div className="d-flex justify-content-center">
-                    <Container>
+                    <Container className="container-sm">
+                        {/* <Row className="d-flex justify-content-center my-3"> */}
                         <Row className="d-flex justify-content-center my-3">
                             <Logo />
                         </Row>
                         <Row className="d-flex justify-content-center mt-4">
-                            <h3 className="text-white mb-3">
+                            <h3 className="text-white mb-3 subtitle-responsive">
                                 Where you can exchange your knowledge with
                                 others
                             </h3>

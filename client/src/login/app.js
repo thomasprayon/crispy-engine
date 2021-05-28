@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Uploader from "./uploader";
-import ProfilePic from "./profile-pic";
 import Profile from "./profile";
 import Header from "./header";
 import axios from "../axios";
@@ -10,7 +9,7 @@ import FindPeople from "./find-people";
 import FriendsOrNot from "./friends";
 import Chat from "./chat";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ReactCSSTransitionGroup from "react-transition-group";
+// import DeleteUser from "./delete";
 
 export default class App extends Component {
     constructor() {
@@ -90,6 +89,7 @@ export default class App extends Component {
                             component={FriendsOrNot}
                         />
                         <Route path="/chat" component={Chat} />
+                        {/* <Route path="/delete/user" component={DeleteUser} /> */}
                         {this.state.uploaderIsVisible && (
                             <Uploader
                                 updateProfilePic={this.updateProfilePic}

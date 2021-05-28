@@ -57,7 +57,7 @@ export function chatMessages(msgs) {
 }
 
 export function chatMessage(msg) {
-    console.log("chatMessage msg: ", msg);
+    // console.log("chatMessage msg: ", msg);
     return {
         type: "ADD_MESSAGE",
         payload: msg,

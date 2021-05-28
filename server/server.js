@@ -13,6 +13,7 @@ const db = require("./db");
 
 const cryptoRandomString = require("crypto-random-string");
 const { sendEmail } = require("./ses");
+
 const s3 = require("./s3");
 const { s3Url } = require("./config.json");
 
@@ -134,7 +135,6 @@ app.post("/login", (req, res) => {
                         success: true,
                     });
                 } else {
-                    // console.log("SOMETHING IS WRONG HERE!");
                     res.json({
                         success: false,
                     });
@@ -355,12 +355,6 @@ app.get("/friend-status/:id", (req, res) => {
     db.friendshipStatus(viewedUser, loggedUser)
         .then((result) => {
             console.log("result.rows", result.rows);
-            // console.log("result.rows[0] ", result.rows[0]);
-            // console.log("result.rows.length", result.rows.length);
-            //if the result is an empty[] then "Add Friend"
-            //if accepted = false --> "Cancel or Accept Friend Request"
-            //depens on the receiver of the friend reqeuest === userId(loggedUser) --> should render "Accept" or "Cancel" if they send it
-            //if accepted = true --> should render "End Friendship"
 
             if (result.rows.length === 0) {
                 console.log("result.rows.length: ", result.rows.length);
@@ -381,17 +375,6 @@ app.get("/friend-status/:id", (req, res) => {
                 );
                 console.log("loggedUser", loggedUser);
                 if (result.rows[0].sender_id === loggedUser) {
-                    // console.log(
-                    //     "result.rows[0].recipient_id: ",
-                    //     result.rows[0].recipient_id
-                    // );
-                    // console.log(
-                    //     "result.rows[0].sender_id: ",
-                    //     result.rows[0].sender_id
-                    // );
-                    // console.log("loggedUser is: ", loggedUser);
-                    // console.log("viewedUser is: ", viewedUser);
-
                     res.json({
                         buttonText: "Accept Request",
                     });
@@ -411,15 +394,9 @@ app.get("/friend-status/:id", (req, res) => {
 app.post("/friend-status/:id", (req, res) => {
     console.log("POST /friend-status/:id was made");
     const loggedUser = req.session.userId;
-    // console.log("POST loggedUser :", loggedUser);
     const viewedUser = req.params.id;
-    // console.log("POST viewedUser: ", viewedUser);
-    // console.log("req.body", req.body);
     const { buttonText } = req.body;
-    // console.log("POST btn.text: ", buttonText);
-    //if it shows "Add Friend" --> should show on (loggedUser) =  "Cancel Request"
-    //if it shows "Accept Friend Request" --> should show on (loggedUser) = "End Friendship"
-    //if it shows "End Friendship or "Cancel Friend Request" --> should show on (loggedUser) = "Add Friend"
+
     if (buttonText === "Add Friend") {
         db.makeFriendRequest(loggedUser, viewedUser)
             .then((result) => {
@@ -478,6 +455,10 @@ app.get("/friends-wannabes", (req, res) => {
         });
 });
 
+app.post("/delete", (req, res) => {
+    console.log("POST in /delete is made!!");
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
@@ -518,9 +499,7 @@ io.on("connection", function (socket) {
     socket.on("chatMessage", (msg) => {
         console.log("msg: ", msg);
         db.insertMessages(msg, userId)
-            .then((result) => {
-                // console.log("insertMessages (result.rows): ", result.rows[0]);
-                // socket.emit("chatMessages", result.rows[0]);
+            .then(() => {
                 lastMesseges();
             })
             .catch((err) => {

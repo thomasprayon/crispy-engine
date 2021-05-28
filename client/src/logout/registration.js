@@ -37,7 +37,7 @@ export default class Registration extends Component {
     }
     render() {
         return (
-            <div className="my-3">
+            <div className="my-3 log-anim">
                 <h3 className="text-white row d-flex justify-content-center">
                     Register here
                 </h3>

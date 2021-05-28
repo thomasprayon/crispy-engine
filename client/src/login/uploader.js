@@ -39,7 +39,7 @@ export default class Uploader extends Component {
     render() {
         return (
             <>
-                <Container className="uploader-container bg-danger">
+                <Container className="uploader-container background fadeIn">
                     <Container className="d-flex justify-content-end pe-5">
                         <span
                             className="close-uploader"
@@ -50,7 +50,7 @@ export default class Uploader extends Component {
                     </Container>
 
                     <Row className="d-flex justify-content-center mt-1">
-                        <h2>Do you want to change your image?</h2>
+                        <h2>Do you want to change your picture?</h2>
                     </Row>
                     <Row className="d-flex justify-content-center mt-2">
                         <div className="upload-btn-wrapper">

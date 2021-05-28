@@ -5,16 +5,16 @@ import ProfilePic from "./profile-pic";
 export default function Header(props) {
     return (
         <>
-            <Navbar bg="primary" expand="xl">
+            <Navbar className="background" expand="xl">
                 <Navbar.Brand href="/">
                     <img
                         src="/images/part1Crop.png"
                         alt="logo"
                         width="40"
                         height="40"
-                        // className="d-inline-block align-top"
+                        className="nav-logo"
                     />{" "}
-                    <span className="header-logo">ExpSwap</span>
+                    <span className="font-weight-bold">ExpSwap</span>
                 </Navbar.Brand>
                 <div className="nav-dropdown">
                     <NavDropdown

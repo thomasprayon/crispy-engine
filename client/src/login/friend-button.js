@@ -12,7 +12,7 @@ export default function FriendButton({ viewerId }) {
         axios
             .get("/friend-status/" + viewerId)
             .then(({ data }) => {
-                console.log("GET data: ", data);
+                // console.log("GET data: ", data);
                 setButtonText(data.buttonText);
             })
             .catch((err) => {
@@ -27,7 +27,7 @@ export default function FriendButton({ viewerId }) {
         axios
             .post("/friend-status/" + viewerId, { buttonText: buttonText })
             .then(({ data }) => {
-                console.log("POST data.btnText; ", data);
+                // console.log("POST data.btnText; ", data);
                 setButtonText(data.buttonText);
             })
             .catch((err) => {

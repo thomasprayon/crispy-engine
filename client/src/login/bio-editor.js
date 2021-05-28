@@ -65,10 +65,13 @@ export default class BioEditor extends Component {
                 {this.props.bio && this.state.showButtons && (
                     <>
                         <Col>
-                            <Row className="d-flex justify-content-center">
+                            <h6 className="d-flex justify-content-center">
+                                About me
+                            </h6>
+                            <Row className="d-flex justify-content-center mt-3">
                                 <p>{this.props.bio}</p>
                             </Row>
-                            <Row className="d-flex justify-content-center">
+                            <Row className="d-flex justify-content-center mt-3">
                                 <a
                                     className="edit-btn"
                                     onClick={() => this.toggleBio()}
@@ -81,7 +84,7 @@ export default class BioEditor extends Component {
                 )}
                 {this.state.showTextArea && (
                     <>
-                        <div className="bio-text-area">
+                        <div className="bio-text-area mt-5">
                             <textarea
                                 className="form-control"
                                 rows="2"
