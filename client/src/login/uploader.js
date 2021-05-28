@@ -52,7 +52,7 @@ export default class Uploader extends Component {
                     <Row className="d-flex justify-content-center mt-1">
                         <h2>Do you want to change your picture?</h2>
                     </Row>
-                    <Row className="d-flex justify-content-center mt-2">
+                    <Row className="d-flex justify-content-center mt-4">
                         <div className="upload-btn-wrapper">
                             <Button>Upload</Button>
                             <input

@@ -31,7 +31,9 @@ export default function FriendsOrNot() {
         <>
             <Container className="my-3">
                 <Container className="background friends-container">
-                    <h2>These people want to be your friends</h2>
+                    <h2 className="m-2">
+                        These people want to be your friends
+                    </h2>
                     {requests &&
                         requests.map((user, index) => {
                             // console.log("user: ", user);
@@ -45,7 +47,7 @@ export default function FriendsOrNot() {
                                         key={index}
                                         id="link-find"
                                     >
-                                        <div className="d-flex justify-content-center">
+                                        <div className="d-flex justify-content-center mt-1">
                                             <img
                                                 key={user.img_url}
                                                 src={user.img_url}
@@ -53,10 +55,10 @@ export default function FriendsOrNot() {
                                             />
                                         </div>
                                         <div className="d-flex justify-content-center">
-                                            <h4 className="align-self-center">
+                                            <h5 className="mt-2 text-capitalize">
                                                 {user.first_name}{" "}
                                                 {user.last_name}
-                                            </h4>
+                                            </h5>
                                         </div>
                                     </Link>
                                     <div className="d-flex justify-content-center">
@@ -75,7 +77,9 @@ export default function FriendsOrNot() {
                         })}
                 </Container>
                 <Container className="background friends-container my-3">
-                    <h2>These people are currently your friends</h2>
+                    <h2 className="m-2">
+                        These people are currently your friends
+                    </h2>
                     {friends &&
                         friends.map((user, index) => {
                             // console.log("user: ", user);
@@ -94,7 +98,7 @@ export default function FriendsOrNot() {
                                         key={index}
                                         id="link-find"
                                     >
-                                        <div className="d-flex justify-content-center">
+                                        <div className="d-flex justify-content-center mt-1">
                                             <img
                                                 key={user.img_url}
                                                 src={user.img_url}
@@ -102,10 +106,10 @@ export default function FriendsOrNot() {
                                             />
                                         </div>
                                         <div className="d-flex justify-content-center">
-                                            <h3 className="">
+                                            <h5 className="mt-2 text-capitalize">
                                                 {user.first_name}{" "}
                                                 {user.last_name}
-                                            </h3>
+                                            </h5>
                                         </div>
                                     </Link>
                                     <div className="d-flex justify-content-center">

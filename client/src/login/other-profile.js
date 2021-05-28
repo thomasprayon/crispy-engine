@@ -45,7 +45,7 @@ export default class OtherProfile extends Component {
                     </Row>
                     <Row>
                         <Col className="d-flex justify-content-center">
-                            <h2>
+                            <h2 className="text-capitalize">
                                 {this.state.firstName} {this.state.lastName}
                             </h2>
                         </Col>
@@ -53,7 +53,9 @@ export default class OtherProfile extends Component {
                     <Row>
                         <Col>
                             <div className="d-flex justify-content-center m-2">
-                                <p className="text-dark">{this.state.bio}</p>
+                                <p className="text-dark text-center">
+                                    {this.state.bio}
+                                </p>
                             </div>
                             <Row className="d-flex justify-content-center">
                                 <FriendButton

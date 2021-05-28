@@ -31,7 +31,7 @@ export default function Header(props) {
                             Find People
                         </NavDropdown.Item>
                         <NavDropdown.Item href="/friends-or-not">
-                            People
+                            Friends
                         </NavDropdown.Item>
                         <NavDropdown.Item href="/chat">Chat</NavDropdown.Item>
                         <NavDropdown.Divider />

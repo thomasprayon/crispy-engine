@@ -85,7 +85,7 @@ export default function FindPeople() {
                                             />
 
                                             <h3
-                                                className="m-4 text-purple d-flex-align-items-center"
+                                                className="m-4 text-purple d-flex-align-items-center text-capitalize"
                                                 id="b"
                                             >
                                                 {user.first_name}{" "}

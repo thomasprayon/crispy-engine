@@ -18,7 +18,7 @@ export default function Profile(props) {
                 </Row>
                 <Row>
                     <Col className="d-flex justify-content-center">
-                        <h2>
+                        <h2 className="text-capitalize">
                             {props.firstName} {props.lastName}
                         </h2>
                     </Col>

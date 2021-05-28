@@ -33,6 +33,7 @@
     border-radius: 50%;
     position: relative;
     top: -5px;
+    object-fit: cover;
 }
 #username-nav {
     color: black;
@@ -57,16 +58,16 @@
     border-radius: 50%;
     border: 3px solid black;
     object-fit: cover;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
 }
 a {
     cursor: pointer;
 }
 .uploader-container {
     position: absolute;
-    top: 10%;
-    left: 13%;
-    height: 12rem;
+    top: 9%;
+    left: 20%;
+    height: 15rem;
     width: 5rem;
     border: 2px solid black;
 }
@@ -197,4 +198,13 @@ a {
     100% {
         background-position: 0% 50%;
     }
+}
+.bio-text-area {
+    width: 25rem;
+}
+.text-area-edit {
+    width: 25rem;
+    height: 5rem;
+    border-radius: 10px;
+    padding: 3px;
 }

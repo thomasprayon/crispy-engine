@@ -32,8 +32,10 @@ export default class BioEditor extends Component {
         // console.log("this.state", this.state);
         // console.log("this.state.draftBio", this.state.draftBio);
         if (!this.state.draftBio) {
-            this.toggleBio();
-            return;
+            if (this.state.draftBio === undefined) {
+                this.toggleBio();
+                return;
+            }
         }
         axios
             .post("/update-bio", {
@@ -54,10 +56,7 @@ export default class BioEditor extends Component {
             <>
                 {!this.props.bio && this.state.showButtons && (
                     <>
-                        <a
-                            className="addBio-btn"
-                            onClick={() => this.toggleBio()}
-                        >
+                        <a onClick={() => this.toggleBio()} id="link-find">
                             Add bio
                         </a>
                     </>
@@ -65,15 +64,17 @@ export default class BioEditor extends Component {
                 {this.props.bio && this.state.showButtons && (
                     <>
                         <Col>
-                            <h6 className="d-flex justify-content-center">
+                            <h6 className="d-flex justify-content-center font-weight-bold">
                                 About me
                             </h6>
                             <Row className="d-flex justify-content-center mt-3">
-                                <p>{this.props.bio}</p>
+                                <p className="text-center text-dark">
+                                    {this.props.bio}
+                                </p>
                             </Row>
-                            <Row className="d-flex justify-content-center mt-3">
+                            <Row className="d-flex justify-content-center mt-3 ">
                                 <a
-                                    className="edit-btn"
+                                    id="link-find"
                                     onClick={() => this.toggleBio()}
                                 >
                                     Edit bio
@@ -84,9 +85,9 @@ export default class BioEditor extends Component {
                 )}
                 {this.state.showTextArea && (
                     <>
-                        <div className="bio-text-area mt-5">
+                        <div className="bio-text-area mt-3">
                             <textarea
-                                className="form-control"
+                                className="text-area-edit"
                                 rows="2"
                                 placeholder="Write something about yourself..."
                                 defaultValue={this.props.bio}

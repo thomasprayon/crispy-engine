@@ -59,7 +59,7 @@ export default function Chat() {
                                                 <Row>
                                                     <img
                                                         src={message.img_url}
-                                                        className="rounded-circle object-fit:cover border border-dark align-self-end mb-2"
+                                                        className="rounded-circle profile-pic-img border border-dark align-self-end mb-2"
                                                         width="50"
                                                         height="50"
                                                     />
