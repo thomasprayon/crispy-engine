@@ -3,6 +3,7 @@ import { socket } from "./socket";
 import { useSelector } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import UserStatus from "./users-online";
 
 export default function Chat() {
     const chatMessages = useSelector((state) => state && state.chatMessages);
@@ -85,6 +86,7 @@ export default function Chat() {
                     ></textarea>
                 </Row>
             </Container>
+            <UserStatus />
         </>
     );
 }

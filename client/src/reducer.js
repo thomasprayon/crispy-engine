@@ -40,6 +40,12 @@ export default function (state = {}, action) {
             chatMessages: action.payload,
         };
     }
+    if (action.type === "USER_ONLINE") {
+        state = {
+            ...state,
+            usersOnline: action.payload,
+        };
+    }
 
     return state;
 }

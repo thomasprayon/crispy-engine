@@ -35,8 +35,8 @@ export default function ToDoList() {
     const handleToggle = (id) => {
         console.log("handleToggle is working!!");
         const updatedTodos = [...todos].map((todo) => {
-            console.log("todo: ", todo);
-            console.log("todo.id", todo.id);
+            // console.log("todo: ", todo);
+            // console.log("todo.id", todo.id);
             if (todo.id === id) {
                 todo.completed = !todo.completed;
             }
@@ -82,8 +82,8 @@ export default function ToDoList() {
                     <button type="submit">Add To Do</button>
                 </form>
                 {todos.map((todo) => {
-                    console.log("todo: ", todo);
-                    console.log("todo.completed: ", todo.completed);
+                    // console.log("todo: ", todo);
+                    // console.log("todo.completed: ", todo.completed);
                     return (
                         <>
                             <div key={todo.id}>

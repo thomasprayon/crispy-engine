@@ -18,9 +18,9 @@ export const init = (store) => {
             store.dispatch(chatMessage(msg));
         });
 
-        socket.on("onlineUsers", (usersOnline) => {
-            console.log("usersOnline", usersOnline);
-            store.dispatch(onlineUsers(usersOnline));
+        socket.on("userOnline", (userOnline) => {
+            console.log("usersOnline", userOnline);
+            store.dispatch(onlineUsers(userOnline));
         });
     }
 };

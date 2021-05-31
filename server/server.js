@@ -530,15 +530,8 @@ io.on("connection", function (socket) {
             });
     });
 
-    socket.on("userStatus", (usersOnline) => {
-        console.log("userStatus: ", usersOnline);
+    socket.on("userOnline", (userOnline) => {
+        console.log("userOnline: ", userOnline);
         onlineUsers[userId] = socket.id;
-        db.getOnlineUsers(userId)
-            .then((result) => {
-                console.log("result.rows userStatus: ", result.rows);
-            })
-            .catch((err) => {
-                console.log("Error in userStatus", err);
-            });
     });
 });

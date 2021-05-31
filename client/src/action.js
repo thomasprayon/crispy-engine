@@ -63,3 +63,11 @@ export function chatMessage(msg) {
         payload: msg,
     };
 }
+
+export function usersOnline(userOnline) {
+    console.log("usersOnline: ", userOnline);
+    return {
+        type: "USER_ONLINE",
+        payload: userOnline,
+    };
+}
