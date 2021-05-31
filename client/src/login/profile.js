@@ -2,6 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BioEditor from "./bio-editor";
 import ToDoList from "./to-do-list";
+import NewsFeed from "./news-feed/news-feed";
 
 export default function Profile(props) {
     return (
@@ -27,8 +28,8 @@ export default function Profile(props) {
                     <BioEditor bio={props.bio} setBio={props.setBio} />
                 </div>
             </div>
-
             <ToDoList />
+            <NewsFeed />
         </>
     );
 }
