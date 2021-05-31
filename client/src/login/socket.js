@@ -17,5 +17,10 @@ export const init = (store) => {
             // console.log("msg from socket: ", msg);
             store.dispatch(chatMessage(msg));
         });
+
+        socket.on("onlineUsers", (usersOnline) => {
+            console.log("usersOnline", usersOnline);
+            store.dispatch(onlineUsers(usersOnline));
+        });
     }
 };

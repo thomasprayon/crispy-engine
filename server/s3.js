@@ -43,3 +43,9 @@ exports.upload = (req, res, next) => {
             res.sendStatus(404);
         });
 };
+module.exports.delete = (imgUrl) => {
+    return s3
+        .delete({ Bucket: "spicedling", Key: "img_url" })
+        .promise()
+        .then(() => console.log("Img in S3 was successfully deleted!!"));
+};

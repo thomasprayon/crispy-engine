@@ -455,8 +455,24 @@ app.get("/friends-wannabes", (req, res) => {
         });
 });
 
+// DELETE ACCOUNT
 app.post("/delete", (req, res) => {
     console.log("POST in /delete is made!!");
+    // console.log("req.session.userId: ", req.session.userId);
+    const { userId } = req.session;
+    db.getUserInformation(userId)
+        .then((result) => {
+            // console.log("result.rows: ", result.rows);
+            result.rows[0].img_url && s3.delete(result.rows[0].img_url);
+            db.deleteUserFromUsers(userId);
+            db.deleteUserFromFriendships(userId);
+            db.deleteUserFromMessages(userId);
+            req.session = null;
+            res.redirect("/welcome");
+        })
+        .catch((err) => {
+            console.log("Error in POST /delete", err);
+        });
 });
 
 app.get("*", function (req, res) {
@@ -471,23 +487,30 @@ server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });
 
+//SOCKET CONNECTION
+const onlineUsers = {};
 io.on("connection", function (socket) {
-    // console.log(`socket with the id ${socket.id} is now connected`);
-
     if (!socket.request.session.userId) {
         return socket.disconnect(true);
     }
 
     const userId = socket.request.session.userId;
-    console.log(`User ${userId} is connected with the socket.id: ${socket.id}`);
+    console.log(
+        `User: ${userId} is connected with the socket.id: ${socket.id}`
+    );
+    onlineUsers[userId] = socket.id;
 
-    // socket.on("disconnect", () => {
-    //     console.log(`User ${userId} just disconneted with socket ${socket.id}`);
-    // });
+    socket.on("disconnect", () => {
+        console.log(
+            `User: ${userId} just disconnected with the socketId : ${socket.id}`
+        );
+        delete onlineUsers[socket.id];
+    });
+
     function lastMesseges() {
         db.getLastTenMessages()
             .then((result) => {
-                console.log("getLastTenMessages(result.rows): ", result.rows);
+                // console.log("getLastTenMessages(result.rows): ", result.rows);
                 socket.emit("chatMessages", result.rows.reverse());
             })
             .catch((err) => {
@@ -504,6 +527,18 @@ io.on("connection", function (socket) {
             })
             .catch((err) => {
                 console.log("Error in insertMessages", err);
+            });
+    });
+
+    socket.on("userStatus", (usersOnline) => {
+        console.log("userStatus: ", usersOnline);
+        onlineUsers[userId] = socket.id;
+        db.getOnlineUsers(userId)
+            .then((result) => {
+                console.log("result.rows userStatus: ", result.rows);
+            })
+            .catch((err) => {
+                console.log("Error in userStatus", err);
             });
     });
 });

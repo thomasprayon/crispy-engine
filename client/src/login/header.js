@@ -35,6 +35,9 @@ export default function Header(props) {
                         </NavDropdown.Item>
                         <NavDropdown.Item href="/chat">Chat</NavDropdown.Item>
                         <NavDropdown.Divider />
+                        <NavDropdown.Item href="/delete/user">
+                            Delete Account
+                        </NavDropdown.Item>
                         <NavDropdown.Item href="/logout">
                             Logout
                         </NavDropdown.Item>

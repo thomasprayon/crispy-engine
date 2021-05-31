@@ -208,3 +208,6 @@ a {
     border-radius: 10px;
     padding: 3px;
 }
+.strike {
+    text-decoration: line-through;
+}

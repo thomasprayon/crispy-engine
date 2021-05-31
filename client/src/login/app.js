@@ -9,7 +9,7 @@ import FindPeople from "./find-people";
 import FriendsOrNot from "./friends";
 import Chat from "./chat";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import DeleteUser from "./delete";
+import DeleteUser from "./delete";
 
 export default class App extends Component {
     constructor() {
@@ -89,7 +89,7 @@ export default class App extends Component {
                             component={FriendsOrNot}
                         />
                         <Route path="/chat" component={Chat} />
-                        {/* <Route path="/delete/user" component={DeleteUser} /> */}
+                        <Route path="/delete/user" component={DeleteUser} />
                         {this.state.uploaderIsVisible && (
                             <Uploader
                                 updateProfilePic={this.updateProfilePic}
