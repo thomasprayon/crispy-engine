@@ -1,3 +1,3 @@
 export default function Logo() {
-    return <img src="/images/logoFinal.gif" className="logo-logout" />;
+    return <img src="/images/logoCropGif.gif" className="logo-logout" />;
 }

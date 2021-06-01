@@ -2,7 +2,8 @@ import { Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BioEditor from "./bio-editor";
 import ToDoList from "./to-do-list";
-import NewsFeed from "./news-feed/news-feed";
+import NewsFeed from "./news-feed";
+import Weather from "./weather/weather-app";
 
 export default function Profile(props) {
     return (
@@ -11,7 +12,7 @@ export default function Profile(props) {
                 <Row>
                     <Col className="d-flex justify-content-center mt-3">
                         <img
-                            src={props.imgUrl}
+                            src={props.imgUrl || "/images/user_default.png"}
                             alt={`${props.firstName} ${props.lastName}`}
                             className="profile-img"
                         />
@@ -30,6 +31,7 @@ export default function Profile(props) {
             </div>
             <ToDoList />
             <NewsFeed />
+            <Weather />
         </>
     );
 }

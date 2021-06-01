@@ -87,7 +87,7 @@ export default class ResetPassword extends Component {
                             <div className="row  d-flex justify-content-center">
                                 <label
                                     htmlFor="email"
-                                    className="col-form-label text-white d-flex justify-content-center"
+                                    className="col-form-label text-dark d-flex justify-content-center"
                                 >
                                     Email
                                 </label>
@@ -116,7 +116,8 @@ export default class ResetPassword extends Component {
                                     >
                                         <Link
                                             to="/login"
-                                            className="text-white btn-go-back"
+                                            className="text-white"
+                                            id="link-find-white"
                                         >
                                             Go Back
                                         </Link>
@@ -135,10 +136,10 @@ export default class ResetPassword extends Component {
                             Oops! Something went wrong, try again!!
                         </p>
                     )}
-                    <div className="row g-3 align-items-center">
+                    <div className="row g-3 d-flex justify-content-center">
                         <label
                             htmlFor="code"
-                            className="col-form-label text-white d-flex justify-content-center"
+                            className="col-form-label text-dark "
                         >
                             Verification Code
                         </label>
@@ -153,7 +154,7 @@ export default class ResetPassword extends Component {
                     <div className="row g-3 align-items-center">
                         <label
                             htmlFor="password"
-                            className="col-form-label text-white d-flex justify-content-center"
+                            className="col-form-label text-dark d-flex justify-content-center"
                         >
                             New Password
                         </label>
@@ -178,7 +179,7 @@ export default class ResetPassword extends Component {
         } else if (this.state.view === 3) {
             return (
                 <div>
-                    <h1 className="text-white mt-2">
+                    <h1 className="text-dark mt-2">
                         You have successfully reset your password
                     </h1>
                     <Button className="mt-2 d-flex justify-content-center">

@@ -64,10 +64,10 @@ export function chatMessage(msg) {
     };
 }
 
-export function usersOnline(userOnline) {
-    console.log("usersOnline: ", userOnline);
+export function userOnline(userStatus) {
+    console.log("userOnline from action: ", userStatus);
     return {
         type: "USER_ONLINE",
-        payload: userOnline,
+        payload: userStatus,
     };
 }

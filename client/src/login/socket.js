@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 
-import { chatMessages, chatMessage } from "../action";
+import { chatMessages, chatMessage, userOnline } from "../action";
 
 export let socket;
 
@@ -18,9 +18,9 @@ export const init = (store) => {
             store.dispatch(chatMessage(msg));
         });
 
-        socket.on("userOnline", (userOnline) => {
-            console.log("usersOnline", userOnline);
-            store.dispatch(onlineUsers(userOnline));
+        socket.on("userOnline", (userStatus) => {
+            console.log("userOnline from socket: ", userStatus);
+            store.dispatch(userOnline(userStatus));
         });
     }
 };

@@ -37,7 +37,10 @@ export default class OtherProfile extends Component {
                     <Row>
                         <Col className="d-flex justify-content-center mt-3">
                             <img
-                                src={this.state.imgUrl}
+                                src={
+                                    this.state.imgUrl ||
+                                    "/images/user_default.png"
+                                }
                                 alt={`${this.state.firstName} ${this.state.lastName}`}
                                 className="profile-img"
                             />

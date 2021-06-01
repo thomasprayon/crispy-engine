@@ -38,7 +38,7 @@ export default class Registration extends Component {
     render() {
         return (
             <div className="my-3 log-anim">
-                <h3 className="text-white row d-flex justify-content-center">
+                <h3 className="text-dark row d-flex justify-content-center">
                     Register here
                 </h3>
                 {this.state.error && (
@@ -50,7 +50,7 @@ export default class Registration extends Component {
                     <div className="col m-2">
                         <label
                             htmlFor="firstName"
-                            className="col-form-label text-white d-flex justify-content-center"
+                            className="col-form-label text-dark d-flex justify-content-center"
                         >
                             First Name
                         </label>
@@ -66,7 +66,7 @@ export default class Registration extends Component {
                     <div className="col m-2">
                         <label
                             htmlFor="lastName"
-                            className="col-form-label text-white d-flex justify-content-center"
+                            className="col-form-label text-dark d-flex justify-content-center"
                         >
                             Last Name
                         </label>
@@ -84,7 +84,7 @@ export default class Registration extends Component {
                     <div className="col m-2">
                         <label
                             htmlFor="email"
-                            className="col-form-label text-white d-flex justify-content-center"
+                            className="col-form-label text-dark d-flex justify-content-center"
                         >
                             Email
                         </label>
@@ -100,7 +100,7 @@ export default class Registration extends Component {
                     <div className="col m-2">
                         <label
                             htmlFor="password"
-                            className="col-form-label text-white d-flex justify-content-center"
+                            className="col-form-label text-dark d-flex justify-content-center"
                         >
                             Password
                         </label>
@@ -119,8 +119,12 @@ export default class Registration extends Component {
                         Submit
                     </Button>
                 </div>
-                <div className="d-flex justify-content-center mt-4">
-                    <Link to="/login">Already a member? Log in!</Link>
+                <div className="d-flex justify-content-center mt-3">
+                    <Button>
+                        <Link to="/login" id="link-light">
+                            Log in
+                        </Link>
+                    </Button>
                 </div>
             </div>
         );

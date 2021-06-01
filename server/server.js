@@ -530,8 +530,7 @@ io.on("connection", function (socket) {
             });
     });
 
-    socket.on("userOnline", (userOnline) => {
-        console.log("userOnline: ", userOnline);
-        onlineUsers[userId] = socket.id;
+    socket.on("userOnline", (userStatus) => {
+        console.log("userOnline: ", userStatus);
     });
 });

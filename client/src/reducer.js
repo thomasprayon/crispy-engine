@@ -41,11 +41,14 @@ export default function (state = {}, action) {
         };
     }
     if (action.type === "USER_ONLINE") {
+        console.log("action.payload: ", action.payload);
         state = {
             ...state,
             usersOnline: action.payload,
         };
     }
+    // console.log("state: ", state);
+    // console.log("action: ", action);
 
     return state;
 }

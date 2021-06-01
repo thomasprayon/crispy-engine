@@ -80,7 +80,10 @@ export default function FindPeople() {
                                     <Col>
                                         <Row>
                                             <img
-                                                src={user.img_url}
+                                                src={
+                                                    user.img_url ||
+                                                    "/images/user_default.png"
+                                                }
                                                 className="profile-img m-2"
                                             />
 

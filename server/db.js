@@ -130,3 +130,9 @@ module.exports.deleteUserFromMessages = (userId) => {
     const params = [userId];
     return db.query(q, params);
 };
+
+module.exports.getOnlineUsers = (onlineUsers) => {
+    const q = `SELECT id, first_name, last_name, img_url FROM users WHERE id = ($1)`;
+    const params = [onlineUsers];
+    return db.query(q, params);
+};

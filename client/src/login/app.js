@@ -57,7 +57,7 @@ export default class App extends Component {
         return (
             <>
                 <BrowserRouter>
-                    <div className="app-container bg-dark">
+                    <div className="app-container">
                         <Header
                             firstName={this.state.firstName}
                             lastName={this.state.lastName}

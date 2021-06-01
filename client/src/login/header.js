@@ -5,7 +5,7 @@ import ProfilePic from "./profile-pic";
 export default function Header(props) {
     return (
         <>
-            <Navbar className="background" expand="xl">
+            <Navbar className="background-nav" expand="xl">
                 <Navbar.Brand href="/">
                     <img
                         src="/images/part1Crop.png"

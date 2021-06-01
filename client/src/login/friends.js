@@ -50,7 +50,10 @@ export default function FriendsOrNot() {
                                         <div className="d-flex justify-content-center mt-1">
                                             <img
                                                 key={user.img_url}
-                                                src={user.img_url}
+                                                src={
+                                                    user.img_url ||
+                                                    "/images/user_default.png"
+                                                }
                                                 className="profile-img align-self-center"
                                             />
                                         </div>

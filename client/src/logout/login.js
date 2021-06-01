@@ -45,7 +45,7 @@ export default class Login extends Component {
                     <div className="row-auto">
                         <label
                             htmlFor="email"
-                            className="col-form-label text-white d-flex justify-content-center"
+                            className="col-form-label text-dark d-flex justify-content-center"
                         >
                             Email
                         </label>
@@ -62,7 +62,7 @@ export default class Login extends Component {
                         <div className="row-auto">
                             <label
                                 htmlFor="password"
-                                className="col-form-label text-white d-flex justify-content-center"
+                                className="col-form-label text-dark d-flex justify-content-center"
                             >
                                 Password
                             </label>
@@ -83,10 +83,14 @@ export default class Login extends Component {
                             </Button>
                         </div>
                         <div className="d-flex justify-content-center mt-3">
-                            <Link to="/">Sign up</Link>
+                            <Button>
+                                <Link to="/" id="link-light">
+                                    Sign up
+                                </Link>
+                            </Button>
                         </div>
                         <div className="d-flex justify-content-center mt-3">
-                            <Link to="/password/reset">
+                            <Link to="/password/reset" id="link-find">
                                 Forgot your Password?
                             </Link>
                         </div>

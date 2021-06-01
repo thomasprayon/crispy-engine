@@ -11,15 +11,36 @@
     right: 0;
     flex-direction: row;
     overflow: auto;
+    background-image: linear-gradient(-145deg, #ffb5a7 50%, #fec89a 50%);
 }
 .welcome-container {
     display: flex;
-    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    background-image: linear-gradient(145deg, #f7a9a8 50%, #7d82b8 50%);
+    /* background-color: #51058f; */
+}
+.logo-content {
+    /* background-color: #ffb5a7; */
+    height: 100vh;
+}
+
+.registration-login-content {
+    /* background-color: #fec89a; */
+    height: 100vh;
+}
+.background-1 {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(72deg, #3bceac 50%, #0ead69 50%);
+}
+
+.background-nav {
+    background-color: #fcd5ce;
 }
 
 .nav-dropdown {
@@ -84,9 +105,16 @@ a {
     opacity: 0;
     margin-left: 10px;
 }
-
+#link-light {
+    color: white;
+    text-decoration: none;
+}
 #link-find {
     color: black;
+}
+#link-find-white {
+    color: white;
+    text-decoration: none;
 }
 
 .friends-container {
@@ -210,4 +238,18 @@ a {
 }
 .strike {
     text-decoration: line-through;
+}
+.news-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.light-theme {
+    background-color: #fff;
+    color: #444444;
+}
+.dark-theme {
+    background-color: #1f1b24;
+    color: #f8f8f8;
 }

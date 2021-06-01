@@ -59,7 +59,10 @@ export default function Chat() {
                                             <Col>
                                                 <Row>
                                                     <img
-                                                        src={message.img_url}
+                                                        src={
+                                                            message.img_url ||
+                                                            "/images/user_default.png"
+                                                        }
                                                         className="rounded-circle profile-pic-img border border-dark align-self-end mb-2"
                                                         width="50"
                                                         height="50"

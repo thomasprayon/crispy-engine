@@ -4,9 +4,11 @@ import { useEffect } from "react";
 export default function UserOnline() {
     const userOnline = useSelector((state) => state && state.userStatus);
     console.log("userOnline: ", userOnline);
+    console.log("userOnline in users-online: ", userOnline);
+    console.log();
 
     useEffect(() => {
-        console.log("useEffect mounted in users-status.js");
+        console.log("useEffect mounted in users-online.js");
     }, [userOnline]);
 
     return (
