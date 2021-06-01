@@ -531,11 +531,16 @@ io.on("connection", function (socket) {
     });
 
     function connectedUsers() {
-        let arr = Object.values(onlineUsers);
-        db.getUsersOnline(arr).then((result) => {
-            console.log("result.rows: ", result.rows);
-            socket.emit("userOnline", onlineUsers);
-        });
+        console.log("onlineUsers in connectedUsers: ", onlineUsers);
+        let arr = Object.keys(onlineUsers);
+        db.getUsersOnline(arr)
+            .then((result) => {
+                console.log("result.rows: ", result.rows);
+                socket.emit("userOnline", result.rows);
+            })
+            .catch((err) => {
+                console.log("Error in connectedUsers", err);
+            });
     }
     connectedUsers();
 });

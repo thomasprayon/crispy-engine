@@ -13,7 +13,7 @@ export default function UserOnline() {
     return (
         <>
             <div>
-                <h2>Users that are online</h2>
+                <h2>Users that are online:</h2>
                 {userOnline &&
                     userOnline.map((user, index) => {
                         console.log("user: ", user);
@@ -21,9 +21,17 @@ export default function UserOnline() {
                         return (
                             <>
                                 <p>
-                                    Here are the users that are online in the
-                                    moment
+                                    {user.first_name} {user.last_name}
                                 </p>
+                                <img
+                                    src={
+                                        user.img_url ||
+                                        "/images/user_default.png"
+                                    }
+                                    width="50"
+                                    height="50"
+                                    className="profile-pic-img"
+                                />
                             </>
                         );
                     })}
