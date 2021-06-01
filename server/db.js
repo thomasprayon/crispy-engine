@@ -131,8 +131,8 @@ module.exports.deleteUserFromMessages = (userId) => {
     return db.query(q, params);
 };
 
-module.exports.getOnlineUsers = (onlineUsers) => {
-    const q = `SELECT id, first_name, last_name, img_url FROM users WHERE id = ($1)`;
-    const params = [onlineUsers];
+module.exports.getUsersOnline = (arr) => {
+    const q = `SELECT id, first_name, last_name, img_url FROM users WHERE id = ANY($1)`;
+    const params = [arr];
     return db.query(q, params);
 };

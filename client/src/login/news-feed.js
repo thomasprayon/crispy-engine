@@ -4,7 +4,6 @@ import axios from "axios";
 export default function NewsFeed() {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(false);
-    const apiKey = "25efdd588d874eb5811036a5b2fefc29";
 
     const news = `https://newsapi.org/v2/top-headlines?country=us&apiKey=25efdd588d874eb5811036a5b2fefc29&pageSize=10`;
 

@@ -47,8 +47,8 @@ export default function (state = {}, action) {
             usersOnline: action.payload,
         };
     }
-    // console.log("state: ", state);
-    // console.log("action: ", action);
+    console.log("state: ", state);
+    console.log("action: ", action);
 
     return state;
 }

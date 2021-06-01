@@ -2,10 +2,9 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 export default function UserOnline() {
-    const userOnline = useSelector((state) => state && state.userStatus);
+    const userOnline = useSelector((state) => state && state.usersOnline);
     console.log("userOnline: ", userOnline);
     console.log("userOnline in users-online: ", userOnline);
-    console.log();
 
     useEffect(() => {
         console.log("useEffect mounted in users-online.js");

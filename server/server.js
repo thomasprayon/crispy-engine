@@ -530,7 +530,12 @@ io.on("connection", function (socket) {
             });
     });
 
-    socket.on("userOnline", (userStatus) => {
-        console.log("userOnline: ", userStatus);
-    });
+    function connectedUsers() {
+        let arr = Object.values(onlineUsers);
+        db.getUsersOnline(arr).then((result) => {
+            console.log("result.rows: ", result.rows);
+            socket.emit("userOnline", onlineUsers);
+        });
+    }
+    connectedUsers();
 });
